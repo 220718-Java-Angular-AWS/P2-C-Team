@@ -1,4 +1,4 @@
-package com.revature.Celectronics;
+package com.revature.MKPG;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

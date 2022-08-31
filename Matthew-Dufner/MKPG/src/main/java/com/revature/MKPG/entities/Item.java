@@ -1,11 +1,11 @@
-package com.revature.Celectronics.entities;
+package com.revature.MKPG.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 
-@Entity(name = "items")
-public class Items {
+@Entity(name = "item")
+public class Item {
     @Id
     @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
