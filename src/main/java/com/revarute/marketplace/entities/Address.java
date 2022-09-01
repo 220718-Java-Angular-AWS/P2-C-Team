@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "address_id")
     private Integer addressId;
     @Column
     private String street;
@@ -24,8 +24,7 @@ public class Address {
     public Address() {
     }
 
-    public Address(Integer addressId, String street, String city, String state, String type, Customer customer) {
-        this.addressId = addressId;
+    public Address(String street, String city, String state, String type, Customer customer) {
         this.street = street;
         this.city = city;
         this.state = state;

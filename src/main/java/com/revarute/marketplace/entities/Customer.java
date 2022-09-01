@@ -9,11 +9,11 @@ import java.util.Date;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "customer_id")
     private Integer customerId;
-    @Column
+    @Column(name = "first_name")
     private String firstName;
-    @Column
+    @Column(name = "last_name")
     private String lastName;
     @Column
     private String email;
@@ -21,18 +21,24 @@ public class Customer {
     private String password;
     @Column
     private String phone;
-    @Column
+    @Column(name = "birth_date")
     private Date birthDate;
     @Column
     @Temporal(TemporalType.DATE)
     private Date created;
 
-    private String address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, String email, String password, String phoneNo, Date birthDate, Date created) {
+    public Customer(String firstName, String lastName, String email, String password, String phoneNo, Date birthDate, Date created, Address address, Cart cart) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -40,6 +46,8 @@ public class Customer {
         this.phone= phoneNo;
         this.birthDate = birthDate;
         this.created = created;
+        this.address = address;
+        this.cart = cart;
     }
 
     public Integer getCustomerId() {
@@ -106,12 +114,20 @@ public class Customer {
         this.created = created;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     @Override
@@ -126,6 +142,7 @@ public class Customer {
                 ", birthDate=" + birthDate +
                 ", created=" + created +
                 ", address=" + address +
+                ", cart=" + cart +
                 '}';
     }
 }
