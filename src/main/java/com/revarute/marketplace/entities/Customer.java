@@ -1,8 +1,7 @@
-package com.revature.pojo;
+package com.revarute.marketplace.entities;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
@@ -21,23 +20,24 @@ public class Customer {
     @Column
     private String password;
     @Column
-    private String phoneNo;
+    private String phone;
     @Column
     private Date birthDate;
     @Column
     @Temporal(TemporalType.DATE)
     private Date created;
 
+    private String address;
+
     public Customer() {
     }
 
-    public Customer(Integer customerId, String firstName, String lastName, String email, String password, String phoneNo, Date birthDate, Date created) {
-        this.customerId = customerId;
+    public Customer(String firstName, String lastName, String email, String password, String phoneNo, Date birthDate, Date created) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.phoneNo = phoneNo;
+        this.phone= phoneNo;
         this.birthDate = birthDate;
         this.created = created;
     }
@@ -82,12 +82,12 @@ public class Customer {
         this.password = password;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setPhone(String phoneNo) {
+        this.phone = phoneNo;
     }
 
     public Date getBirthDate() {
@@ -106,6 +106,14 @@ public class Customer {
         this.created = created;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -114,9 +122,10 @@ public class Customer {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", phoneNo='" + phoneNo + '\'' +
+                ", phone='" + phone + '\'' +
                 ", birthDate=" + birthDate +
                 ", created=" + created +
+                ", address=" + address +
                 '}';
     }
 }

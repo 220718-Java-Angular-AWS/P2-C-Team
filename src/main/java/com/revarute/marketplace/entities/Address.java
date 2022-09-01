@@ -1,4 +1,4 @@
-package com.revature.pojo;
+package com.revarute.marketplace.entities;
 
 import javax.persistence.*;
 
