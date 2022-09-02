@@ -2,15 +2,17 @@ package com.revarute.marketplace.beans.controllers;
 
 import com.revarute.marketplace.beans.services.CustomerService;
 import com.revarute.marketplace.entities.Customer;
+import com.revarute.marketplace.exceptions.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping(value = "/customers")
 public class CustomerController {
 
@@ -21,33 +23,43 @@ public class CustomerController {
         this.service = customerService;
     }
 
-    @RequestMapping(value = "/{customerId}", method = RequestMethod.GET)
+    @GetMapping( "/{customerId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public @ResponseBody Customer getCustomerById(@PathVariable Integer customerId) {
+    public Customer getCustomerById(@PathVariable Integer customerId) throws CustomerNotFoundException {
         Optional<Customer> optionalCustomer = service.getCustomerById(customerId);
-        //TODO: Do the isPresent() check and throw exception if needed
-        return optionalCustomer.get();
+
+        Customer customer = null;
+
+        if (optionalCustomer.isPresent()) {
+            customer = optionalCustomer.get();
+        } else {
+            throw new CustomerNotFoundException("Did not find customer id - " + customerId);
+        }
+
+        return customer;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping()
     @ResponseStatus(value = HttpStatus.OK)
-    public @ResponseBody List<Customer> getAllCustomers() {
+    public List<Customer> getAllCustomers() {
         return service.getAllCustomers();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void createCustomer(@RequestBody Customer customer) {
+    public Customer createCustomer(@Valid @RequestBody Customer customer) {
         service.createCustomer(customer);
+        return customer;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void updateCustomer(@RequestBody Customer customer) {
+    public Customer updateCustomer(@RequestBody Customer customer) {
         service.updateCustomer(customer);
+        return customer;
     }
 
-    @RequestMapping(value = "/{customerId}", method = RequestMethod.DELETE)
+    @DeleteMapping("/{customerId}")
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteCustomer(@PathVariable(name = "customerId") Integer id) {
         service.deleteById(id);

@@ -1,6 +1,10 @@
 package com.revarute.marketplace.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 
@@ -11,12 +15,17 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private Integer customerId;
+    @NotNull(message = "First name is required")
+    @Size(min = 1)
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @NotNull(message = "Email is required")
+    @Pattern(regexp = "^[A-Za-z0-9\\.\\-_]+@[A-Za-z0-9\\-]+\\.[A-Za-z]{2,5}$",message = "Email not valid")
     @Column
     private String email;
+    @NotNull(message = "Password is required")
     @Column
     private String password;
     @Column
