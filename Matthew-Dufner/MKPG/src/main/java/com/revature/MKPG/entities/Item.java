@@ -1,8 +1,13 @@
 package com.revature.MKPG.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.validator.constraints.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity(name = "item")
@@ -11,23 +16,33 @@ public class Item {
     @Column(name = "item_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer itemId;
-
     @Column
+    @Size(min=1, max=250)
+    @NotBlank
     private String itemName;
 
     @Column
+    @Size(min=1, max=10000)
+    @NotBlank
     private String description;
 
+
     @Column
+    @Positive
+    @DecimalMin(value= "0.01")
     private Double price;
 
     @Column
+    @Positive
+    @DecimalMin(value= "0.01")
     private Double discountedPrice;
 
     @Column
+    @Size(min=1, max=1)
+    @NotBlank
     private String rating;
 
-    @ManyToOne ( cascade = CascadeType.ALL)
+    @ManyToOne (cascade = CascadeType.ALL)
     @JsonBackReference
     private Cart cart;
 
