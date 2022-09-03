@@ -1,11 +1,12 @@
 package com.revarute.marketplace.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -36,9 +37,8 @@ public class Customer {
     @Temporal(TemporalType.DATE)
     private Date created;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    private List<Address> address;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
@@ -47,15 +47,14 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, String email, String password, String phoneNo, Date birthDate, Date created, Address address, Cart cart) {
+    public Customer(String firstName, String lastName, String email, String password, String phone, Date birthDate, Date created, Cart cart) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.phone= phoneNo;
+        this.phone = phone;
         this.birthDate = birthDate;
         this.created = created;
-        this.address = address;
         this.cart = cart;
     }
 
@@ -123,12 +122,20 @@ public class Customer {
         this.created = created;
     }
 
-    public Address getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
+    }
+
+    public void addAddress(Address address) {
+        if (this.address == null) {
+            this.address = new ArrayList<>();
+        }
+        getAddress().add(address);
+        address.setCustomer(this);
     }
 
     public Cart getCart() {

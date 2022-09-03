@@ -1,5 +1,7 @@
 package com.revarute.marketplace.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,19 +19,19 @@ public class Address {
     private String state;
     @Column
     private String type;
-    @OneToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
 
     public Address() {
     }
 
-    public Address(String street, String city, String state, String type, Customer customer) {
+    public Address(String street, String city, String state, String type) {
         this.street = street;
         this.city = city;
         this.state = state;
         this.type = type;
-        this.customer = customer;
     }
 
     public Integer getAddressId() {
