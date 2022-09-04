@@ -32,7 +32,19 @@ public class ItemController {
         return optionalUser.get();
     }
 
-    @GetMapping()
+    @GetMapping("/{item_name}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public @ResponseBody Item getItemByName(@PathVariable String itemName) {
+        Optional<Item> optionalUser = service.findByName(itemName);
+        try{
+            optionalUser.isPresent();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return optionalUser.get();
+    }
+
+    @GetMapping("/all")
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody List<Item> getAllItems() {
         return service.getAllItems();

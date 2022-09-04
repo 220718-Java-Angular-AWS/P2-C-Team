@@ -1,8 +1,5 @@
 package com.revature.MKPG.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.validator.constraints.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -42,13 +39,13 @@ public class Item {
     @NotBlank
     private String rating;
 
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Cart cart;
-
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Orders orders;
+//    @ManyToOne (cascade = CascadeType.ALL)
+//    @JsonBackReference
+//    private Cart cart;
+//
+//    @ManyToOne (cascade = CascadeType.ALL)
+//    @JsonBackReference
+//    private Orders orders;
 
     public Item(){}
 

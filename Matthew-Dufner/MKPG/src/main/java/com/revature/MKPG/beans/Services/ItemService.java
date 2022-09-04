@@ -25,6 +25,10 @@ public class ItemService {
         return repo.findById(id);
     }
 
+    public Optional<Item> findByName(String itemName){
+        return repo.findBySimilarItemName(itemName);
+    }
+
     public void createItem(Item item){
         repo.save(item);
     }
