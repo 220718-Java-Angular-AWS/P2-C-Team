@@ -1,8 +1,7 @@
-package com.revature.DaynaJonesP2.beans.services;
+package com.revature.MKPG.beans.Services;
 
-import com.revature.DaynaJonesP2.beans.repositories.CartRepository;
-import com.revature.DaynaJonesP2.Entities.Cart;
-import com.revature.DaynaJonesP2.Exceptions.InvalidInputException;
+import com.revature.MKPG.beans.Repositories.CartRepository;
+import com.revature.MKPG.entities.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +11,12 @@ import java.util.Optional;
 @Service
 public class CartService {
     CartRepository repo;
-    ValidatorService validator;
+    //ValidatorService validator;
 
     @Autowired
-    public CartService(CartRepository CartRepository, ValidatorService validatorService) {
+    public CartService(CartRepository CartRepository /*ValidatorService validatorService*/) {
         this.repo = CartRepository;
-        this.validator = validatorService;
+        //this.validator = validatorService;
     }
 
     //5 crud things:
@@ -35,12 +34,13 @@ public class CartService {
         return repo.findById(id);
     }
 
-    public void createCart(Cart cart) throws InvalidInputException {
-        if(validator.validateCart(cart)) {
+    public void createCart(Cart cart) {
+        repo.save(cart);
+        /*if(validator.validateCart(cart)) {
             repo.save(cart);
         } else {
             throw new InvalidInputException("this user has invalid data");
-        }
+        }*/
     }
 
     public void updateCart(Cart cart) {

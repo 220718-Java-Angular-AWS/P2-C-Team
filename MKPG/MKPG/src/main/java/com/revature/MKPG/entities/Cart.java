@@ -1,4 +1,6 @@
-package com.revature.DaynaJonesP2.Entities;
+package com.revature.MKPG.entities;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,12 +16,12 @@ public class Cart {
     @OneToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    @OneToOne
-    @JoinColumn(name = "item_id")
-    private Item item;
+
+    @OneToMany
+    @JsonBackReference
+    private List<Item> items;
 
     @Column
-
     private int quantity;
     @Temporal(TemporalType.DATE)
     @Column
@@ -28,12 +30,10 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(Integer cartId, Customer customer, List<Item> itemList, String color, String size, int quantity, Date checkOutDate) {
+    public Cart(Integer cartId, Customer customer, List<Item> itemList, int quantity, Date checkOutDate) {
         this.cartId = cartId;
         this.customer = customer;
-        this.itemList = itemList;
-        this.color = color;
-        this.size = size;
+        this.items = itemList;
         this.quantity = quantity;
         this.checkOutDate = checkOutDate;
     }
@@ -55,28 +55,13 @@ public class Cart {
     }
 
     public List<Item> getItemList() {
-        return itemList;
+        return items;
     }
 
     public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
+        this.items = itemList;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -99,9 +84,7 @@ public class Cart {
         return "Cart{" +
                 "cartId=" + cartId +
                 ", customer=" + customer +
-                ", itemList=" + itemList +
-                ", color='" + color + '\'' +
-                ", size='" + size + '\'' +
+                ", itemList=" + items +
                 ", quantity=" + quantity +
                 ", checkOutDate=" + checkOutDate +
                 '}';
