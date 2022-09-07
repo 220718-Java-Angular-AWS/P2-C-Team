@@ -1,7 +1,6 @@
 package com.revature.MKPG.beans.Controllers;
 
 import com.revature.MKPG.beans.Services.ItemService;
-import com.revature.MKPG.entities.Customer;
 import com.revature.MKPG.entities.Item;
 import com.revature.MKPG.exceptions.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/item")
-public class ItemController {
+public class ItemController{
     private ItemService service;
 
     @Autowired
@@ -32,7 +31,7 @@ public class ItemController {
         if(optionalItem.isPresent()) {
             item = optionalItem.get();
         }else {
-            throw new CustomerNotFoundException( "Customer id " + itemId + " not found");
+            throw new CustomerNotFoundException( "Item id " + itemId + " not found");
         }
         /*
         try{
@@ -53,7 +52,7 @@ public class ItemController {
         if(optionalItem.isPresent()) {
             item = optionalItem.get();
         }else {
-            throw new CustomerNotFoundException( "Customer id " + itemName + " not found");
+            throw new CustomerNotFoundException( "Item name " + itemName + " not found");
         }
        /* Optional<Item> optionalUser = service.findByName(itemName);
         try{
