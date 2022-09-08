@@ -3,13 +3,12 @@ package com.revature.MKPG.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "carts")
-public class Cart {
+@Table(name = "orders")
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -24,19 +23,22 @@ public class Cart {
 
     @Column
     private int quantity;
-    @Temporal(TemporalType.DATE)
-    @Column
-    private Date checkOutDate;
 
-    public Cart() {
+    @Column
+    private String deliveryDate;
+    @Column
+    private String status;
+
+    public Orders() {
     }
 
-    public Cart(Integer cartId, Customer customer, List<Item> itemList, int quantity, Date checkOutDate) {
+    public Orders(Integer cartId, Customer customer, List<Item> items, int quantity, String deliveryDate, String status) {
         this.cartId = cartId;
         this.customer = customer;
-        this.items = itemList;
+        this.items = items;
         this.quantity = quantity;
-        this.checkOutDate = checkOutDate;
+        this.deliveryDate = deliveryDate;
+        this.status = status;
     }
 
     public Integer getCartId() {
@@ -55,14 +57,13 @@ public class Cart {
         this.customer = customer;
     }
 
-    public List<Item> getItemList() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItemList(List<Item> itemList) {
-        this.items = itemList;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
-
 
     public int getQuantity() {
         return quantity;
@@ -72,35 +73,44 @@ public class Cart {
         this.quantity = quantity;
     }
 
-    public Date getCheckOutDate() {
-        return checkOutDate;
+    public String getDeliveryDate() {
+        return deliveryDate;
     }
 
-    public void setCheckOutDate(Date checkOutDate) {
-        this.checkOutDate = checkOutDate;
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cart cart = (Cart) o;
-        return quantity == cart.quantity && Objects.equals(cartId, cart.cartId) && customer.equals(cart.customer) && Objects.equals(items, cart.items) && Objects.equals(checkOutDate, cart.checkOutDate);
+        Orders orders = (Orders) o;
+        return quantity == orders.quantity && Objects.equals(cartId, orders.cartId) && Objects.equals(customer, orders.customer) && Objects.equals(items, orders.items) && Objects.equals(deliveryDate, orders.deliveryDate) && Objects.equals(status, orders.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cartId, customer, items, quantity, checkOutDate);
+        return Objects.hash(cartId, customer, items, quantity, deliveryDate, status);
     }
 
     @Override
     public String toString() {
-        return "Cart{" +
+        return "Orders{" +
                 "cartId=" + cartId +
                 ", customer=" + customer +
-                ", itemList=" + items +
+                ", items=" + items +
                 ", quantity=" + quantity +
-                ", checkOutDate=" + checkOutDate +
+                ", deliveryDate='" + deliveryDate + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

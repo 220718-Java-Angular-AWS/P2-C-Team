@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -146,6 +147,19 @@ public class Customer {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(customerId, customer.customerId) && firstName.equals(customer.firstName) && Objects.equals(lastName, customer.lastName) && email.equals(customer.email) && password.equals(customer.password) && Objects.equals(phone, customer.phone) && Objects.equals(birthDate, customer.birthDate) && Objects.equals(created, customer.created) && Objects.equals(address, customer.address) && Objects.equals(cart, customer.cart);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerId, firstName, lastName, email, password, phone, birthDate, created, address, cart);
     }
 
     @Override

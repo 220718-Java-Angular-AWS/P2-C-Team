@@ -1,9 +1,4 @@
 package com.revature.MKPG.entities;
-//
-//import jakarta.validation.constraints.DecimalMin;
-//import jakarta.validation.constraints.NotBlank;
-//import jakarta.validation.constraints.Positive;
-//import jakarta.validation.constraints.Size;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
@@ -20,12 +15,12 @@ public class Item {
     private Integer itemId;
     @Column(name = "item_name")
     @Size(min=1, max=250)
-    @NotBlank
+    @NotBlank(message = "Item must have a name.")
     private String itemName;
 
     @Column
     @Size(min=1, max=10000)
-    @NotBlank
+    @NotBlank(message = "Description cannot be blank.")
     private String description;
 
 
@@ -41,7 +36,7 @@ public class Item {
 
     @Column
     @Size(min=1, max=1)
-    @NotBlank
+    @NotBlank(message = "If item is not yet rated put \"Pending Rating\" otherwise item must have a rating.")
     private String rating;
 
     @ManyToOne (cascade = CascadeType.ALL)
