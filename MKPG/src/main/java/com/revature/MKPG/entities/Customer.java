@@ -2,6 +2,8 @@ package com.revature.MKPG.entities;
 
 //import jakarta.validation.constraints.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -45,8 +47,8 @@ public class Customer {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @OneToMany
-    @JoinColumn(name = "order")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Order> order;
 
     public Customer() {

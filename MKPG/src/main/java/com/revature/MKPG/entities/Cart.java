@@ -1,6 +1,6 @@
 package com.revature.MKPG.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,9 +18,9 @@ public class Cart {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany
-    @JsonBackReference
-    private List<Item> items;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Item> item;
 
     @Column
     private int quantity;
@@ -34,7 +34,7 @@ public class Cart {
     public Cart(Integer cartId, Customer customer, List<Item> itemList, int quantity, Date checkOutDate) {
         this.cartId = cartId;
         this.customer = customer;
-        this.items = itemList;
+        this.item = itemList;
         this.quantity = quantity;
         this.checkOutDate = checkOutDate;
     }
@@ -56,11 +56,11 @@ public class Cart {
     }
 
     public List<Item> getItemList() {
-        return items;
+        return item;
     }
 
     public void setItemList(List<Item> itemList) {
-        this.items = itemList;
+        this.item = itemList;
     }
 
 
@@ -85,12 +85,12 @@ public class Cart {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cart cart = (Cart) o;
-        return quantity == cart.quantity && Objects.equals(cartId, cart.cartId) && customer.equals(cart.customer) && Objects.equals(items, cart.items) && Objects.equals(checkOutDate, cart.checkOutDate);
+        return quantity == cart.quantity && Objects.equals(cartId, cart.cartId) && customer.equals(cart.customer) && Objects.equals(item, cart.item) && Objects.equals(checkOutDate, cart.checkOutDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cartId, customer, items, quantity, checkOutDate);
+        return Objects.hash(cartId, customer, item, quantity, checkOutDate);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class Cart {
         return "Cart{" +
                 "cartId=" + cartId +
                 ", customer=" + customer +
-                ", itemList=" + items +
+                ", itemList=" + item +
                 ", quantity=" + quantity +
                 ", checkOutDate=" + checkOutDate +
                 '}';
