@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "cart_id")
     private Integer cartId;
     @OneToOne
     @JoinColumn(name = "customer_id")

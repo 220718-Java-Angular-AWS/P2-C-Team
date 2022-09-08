@@ -1,5 +1,7 @@
 package com.revature.MKPG.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -35,20 +37,20 @@ public class Item {
     private Double discountedPrice;
 
     @Column
-    @Size(min=1, max=1)
+    @Size(min=1, max=16)
     @NotBlank(message = "If item is not yet rated put \"Pending Rating\" otherwise item must have a rating.")
     private String rating;
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
+    @JsonBackReference
     private Cart cart;
 
-//    @ManyToOne (cascade = CascadeType.ALL)
-//    @JsonBackReference
-//    private Orders orders;
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Order order;
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     public Item(){}

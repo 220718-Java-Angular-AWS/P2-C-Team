@@ -6,10 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 
 @Entity
@@ -47,10 +45,15 @@ public class Customer {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
+    @OneToMany
+    @JoinColumn(name = "order")
+    private List<Order> order;
+
     public Customer() {
     }
 
-    public Customer(String firstName, String lastName, String email, String password, String phone, Date birthDate, Date created, Cart cart) {
+    public Customer(Integer customerId, String firstName, String lastName, String email, String password, String phone, Date birthDate, Date created) {
+        this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -58,7 +61,6 @@ public class Customer {
         this.phone = phone;
         this.birthDate = birthDate;
         this.created = created;
-        this.cart = cart;
     }
 
     public Integer getCustomerId() {
@@ -105,8 +107,8 @@ public class Customer {
         return phone;
     }
 
-    public void setPhone(String phoneNo) {
-        this.phone = phoneNo;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Date getBirthDate() {
@@ -133,14 +135,6 @@ public class Customer {
         this.address = address;
     }
 
-    public void addAddress(Address address) {
-        if (this.address == null) {
-            this.address = new ArrayList<>();
-        }
-        getAddress().add(address);
-        address.setCustomer(this);
-    }
-
     public Cart getCart() {
         return cart;
     }
@@ -149,32 +143,11 @@ public class Customer {
         this.cart = cart;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(customerId, customer.customerId) && firstName.equals(customer.firstName) && Objects.equals(lastName, customer.lastName) && email.equals(customer.email) && password.equals(customer.password) && Objects.equals(phone, customer.phone) && Objects.equals(birthDate, customer.birthDate) && Objects.equals(created, customer.created) && Objects.equals(address, customer.address) && Objects.equals(cart, customer.cart);
+    public List<Order> getOrder() {
+        return order;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(customerId, firstName, lastName, email, password, phone, birthDate, created, address, cart);
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "customerId=" + customerId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", birthDate=" + birthDate +
-                ", created=" + created +
-                ", address=" + address +
-                ", cart=" + cart +
-                '}';
+    public void setOrder(List<Order> order) {
+        this.order = order;
     }
 }

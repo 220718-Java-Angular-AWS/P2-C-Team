@@ -1,7 +1,5 @@
 package com.revature.MKPG.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +17,7 @@ public class Category {
     private String console;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JoinColumn(name = "item")
     private List<Item> item;
 
     public Category() {

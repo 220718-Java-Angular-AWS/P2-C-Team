@@ -7,33 +7,34 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "orders")
-public class Orders {
+@Table(name = "order")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Integer cartId;
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    @OneToMany
-    @JsonBackReference
-    private List<Item> items;
+    @Column(name = "orders_id")
+    private Integer orderId;
 
     @Column
     private int quantity;
 
     @Column
     private String deliveryDate;
+
     @Column
     private String status;
 
-    public Orders() {
+    @ManyToOne
+    @JsonBackReference
+    private Customer customer;
+
+    @OneToMany
+    @JoinColumn(name = "item")
+    private List<Item> items;
+    public Order() {
     }
 
-    public Orders(Integer cartId, Customer customer, List<Item> items, int quantity, String deliveryDate, String status) {
-        this.cartId = cartId;
+    public Order(Integer cartId, Customer customer, List<Item> items, int quantity, String deliveryDate, String status) {
+        this.orderId = orderId;
         this.customer = customer;
         this.items = items;
         this.quantity = quantity;
@@ -41,12 +42,12 @@ public class Orders {
         this.status = status;
     }
 
-    public Integer getCartId() {
-        return cartId;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setCartId(Integer cartId) {
-        this.cartId = cartId;
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public Customer getCustomer() {
@@ -93,24 +94,24 @@ public class Orders {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Orders orders = (Orders) o;
-        return quantity == orders.quantity && Objects.equals(cartId, orders.cartId) && Objects.equals(customer, orders.customer) && Objects.equals(items, orders.items) && Objects.equals(deliveryDate, orders.deliveryDate) && Objects.equals(status, orders.status);
+        Order order = (Order) o;
+        return quantity == order.quantity && Objects.equals(orderId, order.orderId) && Objects.equals(deliveryDate, order.deliveryDate) && Objects.equals(status, order.status) && Objects.equals(customer, order.customer) && Objects.equals(items, order.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cartId, customer, items, quantity, deliveryDate, status);
+        return Objects.hash(orderId, quantity, deliveryDate, status, customer, items);
     }
 
     @Override
     public String toString() {
-        return "Orders{" +
-                "cartId=" + cartId +
-                ", customer=" + customer +
-                ", items=" + items +
+        return "Order{" +
+                "orderId=" + orderId +
                 ", quantity=" + quantity +
                 ", deliveryDate='" + deliveryDate + '\'' +
                 ", status='" + status + '\'' +
+                ", customer=" + customer +
+                ", items=" + items +
                 '}';
     }
 }
