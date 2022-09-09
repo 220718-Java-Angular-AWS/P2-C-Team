@@ -1,7 +1,6 @@
 package com.revature.MKPG.entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -24,8 +23,9 @@ public class Order {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<Item> item;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     public Order() {
     }
@@ -81,11 +81,11 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public List<Item> getItem() {
+    public Item getItem() {
         return item;
     }
 
-    public void setItem(List<Item> item) {
+    public void setItem(Item item) {
         this.item = item;
     }
 
@@ -97,6 +97,7 @@ public class Order {
                 ", deliveryDate='" + deliveryDate + '\'' +
                 ", status='" + status + '\'' +
                 ", cart=" + cart +
+                ", item=" + item +
                 '}';
     }
 }

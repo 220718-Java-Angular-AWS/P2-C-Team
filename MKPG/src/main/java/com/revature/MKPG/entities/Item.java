@@ -5,6 +5,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "item")
@@ -39,15 +40,12 @@ public class Item {
     @NotBlank(message = "If item is not yet rated put \"Pending Rating\" otherwise item must have a rating.")
     private String rating;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @OneToMany(mappedBy = "item")
+    private List<Order> orders;
 
-    /*
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
-     */
 
     public Item(){}
 
@@ -107,6 +105,21 @@ public class Item {
         this.rating = rating;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -130,6 +143,8 @@ public class Item {
                 ", price=" + price +
                 ", discountedPrice=" + discountedPrice +
                 ", rating='" + rating + '\'' +
+                ", order=" + orders +
+                ", category=" + category +
                 '}';
     }
 }

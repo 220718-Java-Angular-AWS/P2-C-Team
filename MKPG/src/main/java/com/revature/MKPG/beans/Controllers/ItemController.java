@@ -21,7 +21,7 @@ public class ItemController{
         this.service = itemService;
     }
 
-    @GetMapping("/{itemId}")
+    @GetMapping("/id/{itemId}")
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody Item getItemById(@PathVariable Integer itemId) {
         Optional<Item> optionalItem = service.getItemById(itemId);
@@ -42,9 +42,10 @@ public class ItemController{
         return item;
     }
 
-    @GetMapping("/{item_name}")
+    @GetMapping("/name/{itemName}")
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody Item getItemByName(@PathVariable String itemName) {
+        System.out.println(itemName);
         Optional<Item> optionalItem = service.findByName(itemName);
 
         Item item = null;
