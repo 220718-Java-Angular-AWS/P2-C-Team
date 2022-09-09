@@ -1,11 +1,11 @@
 package com.revature.MKPG.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "carts")
@@ -18,12 +18,12 @@ public class Cart {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Item> item;
+     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+     @JsonBackReference
+     private List<Order> orders;
 
     @Column
-    private int quantity;
+    private Integer total;
     @Temporal(TemporalType.DATE)
     @Column
     private Date checkOutDate;
@@ -31,11 +31,9 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(Integer cartId, Customer customer, List<Item> itemList, int quantity, Date checkOutDate) {
+    public Cart(Integer cartId, Integer total, Date checkOutDate) {
         this.cartId = cartId;
-        this.customer = customer;
-        this.item = itemList;
-        this.quantity = quantity;
+        this.total = total;
         this.checkOutDate = checkOutDate;
     }
 
@@ -47,29 +45,12 @@ public class Cart {
         this.cartId = cartId;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Integer getTotal() {
+        return total;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public List<Item> getItemList() {
-        return item;
-    }
-
-    public void setItemList(List<Item> itemList) {
-        this.item = itemList;
-    }
-
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
     public Date getCheckOutDate() {
@@ -80,17 +61,28 @@ public class Cart {
         this.checkOutDate = checkOutDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cart cart = (Cart) o;
-        return quantity == cart.quantity && Objects.equals(cartId, cart.cartId) && customer.equals(cart.customer) && Objects.equals(item, cart.item) && Objects.equals(checkOutDate, cart.checkOutDate);
+    public Customer getCustomer() {
+        return customer;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(cartId, customer, item, quantity, checkOutDate);
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void addOrder(Order order) {
+        if (this.orders == null) {
+            this.orders = new ArrayList<>();
+        }
+        getOrders().add(order);
+        order.setCart(this);
     }
 
     @Override
@@ -98,8 +90,8 @@ public class Cart {
         return "Cart{" +
                 "cartId=" + cartId +
                 ", customer=" + customer +
-                ", itemList=" + item +
-                ", quantity=" + quantity +
+                ", orders=" + orders +
+                ", total=" + total +
                 ", checkOutDate=" + checkOutDate +
                 '}';
     }

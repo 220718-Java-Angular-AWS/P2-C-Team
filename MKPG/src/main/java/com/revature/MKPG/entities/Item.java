@@ -40,20 +40,18 @@ public class Item {
     private String rating;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private Order order;
 
+    /*
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
+     */
 
     public Item(){}
 
-    public Item(String itemName, String description, Double price, Double discountedPrice, String rating){
+    public Item(String itemName, String description, Double price, Double discountedPrice, String rating) {
         this.itemName = itemName;
         this.description = description;
         this.price = price;

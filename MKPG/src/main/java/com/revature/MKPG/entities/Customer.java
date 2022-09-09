@@ -2,12 +2,13 @@ package com.revature.MKPG.entities;
 
 //import jakarta.validation.constraints.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,21 +42,13 @@ public class Customer {
     private Date created;
 
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonBackReference
     private List<Address> address;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Order> order;
 
     public Customer() {
     }
 
-    public Customer(Integer customerId, String firstName, String lastName, String email, String password, String phone, Date birthDate, Date created) {
-        this.customerId = customerId;
+    public Customer(String firstName, String lastName, String email, String password, String phone, Date birthDate, Date created) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -137,19 +130,28 @@ public class Customer {
         this.address = address;
     }
 
-    public Cart getCart() {
-        return cart;
+    public void addAddress(Address address) {
+        if (this.address == null) {
+            this.address = new ArrayList<>();
+        }
+        getAddress().add(address);
+        address.setCustomer(this);
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
 
-    public List<Order> getOrder() {
-        return order;
-    }
 
-    public void setOrder(List<Order> order) {
-        this.order = order;
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthDate=" + birthDate +
+                ", created=" + created +
+                ", address=" + address +
+                '}';
     }
 }

@@ -4,14 +4,13 @@ import com.revature.MKPG.beans.Services.CartService;
 import com.revature.MKPG.entities.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
-@RequestMapping(value = "/Cart")
+@RestController
+@RequestMapping(value = "/cart")
 public class CartController {
     private CartService service;
 
@@ -29,7 +28,7 @@ public class CartController {
     // PUT/PATCH - update - save,
     // DELETE - delete - delete
 
-    @RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
+    @GetMapping(value = "/{cartId}")
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody Cart getCartById(@PathVariable Integer cartId) {
         Optional<Cart> optionalCart = service.getCartById(cartId);
@@ -37,25 +36,25 @@ public class CartController {
         return optionalCart.get();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping()
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody List<Cart> getAllCart() {
         return service.getAllCart();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void createCart(@RequestBody Cart cart){
         service.createCart(cart);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PostMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void updateCart(@RequestBody Cart cart) {
         service.updateCart(cart);
     }
 
-    @RequestMapping(value = "/{cartId}", method = RequestMethod.DELETE)
+    @PostMapping(value = "/{cartId}")
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteCart(@PathVariable(name = "cartId") Integer id) {
         service.deleteById(id);

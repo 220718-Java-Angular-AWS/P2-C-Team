@@ -1,7 +1,10 @@
 package com.revature.MKPG.beans.Controllers;
 
 import com.revature.MKPG.beans.Services.AddressService;
+import com.revature.MKPG.beans.Services.CustomerService;
 import com.revature.MKPG.entities.Address;
+import com.revature.MKPG.entities.Customer;
+import com.revature.MKPG.exceptions.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +17,12 @@ import java.util.Optional;
 public class AddressController {
 
     private AddressService addressService;
+    private CustomerService customerService;
 
     @Autowired
-    public AddressController(AddressService addressService) {
+    public AddressController(AddressService addressService, CustomerService customerService) {
         this.addressService = addressService;
+        this.customerService = customerService;
     }
 
     @RequestMapping(value = "/{addressId}", method = RequestMethod.GET)
@@ -32,7 +37,22 @@ public class AddressController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void createAddress(@RequestBody Address address){ addressService.createAddress(address);}
+    public Address createAddress(@RequestBody Address address){
+        Integer customerId = address.getCustomer().getCustomerId();
+        Optional<Customer> optionalCustomer = customerService.getCustomerById(customerId);
+        Customer customer = null;
+
+        if (optionalCustomer.isPresent()) {
+            customer = optionalCustomer.get();
+            customer.addAddress(address);
+
+        } else {
+            throw new CustomerNotFoundException("Did not find customer id - " + customerId);
+        }
+        addressService.createAddress(address);
+
+        return address;
+    }
 
     @PutMapping
     @ResponseStatus(value = HttpStatus.ACCEPTED)

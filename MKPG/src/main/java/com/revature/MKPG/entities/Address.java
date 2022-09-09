@@ -1,7 +1,5 @@
 package com.revature.MKPG.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -22,9 +20,8 @@ public class Address {
     private String zipCode;
     @Column
     private String type;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "customer_id")
-    @JsonBackReference
     private Customer customer;
 
     public Address() {
