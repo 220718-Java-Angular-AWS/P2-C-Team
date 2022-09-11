@@ -72,7 +72,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
-### VS Code ###
+### VS Code ##
 .vscode/
 
 
