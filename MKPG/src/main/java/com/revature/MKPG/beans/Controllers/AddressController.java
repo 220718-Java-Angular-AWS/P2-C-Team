@@ -38,6 +38,22 @@ public class AddressController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public Address createAddress(@RequestBody Address address){
+        searchCustomer(address);
+        addressService.createAddress(address);
+
+        return address;
+    }
+
+    @PutMapping
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    public Address updateAddress(@RequestBody Address address){
+        searchCustomer(address);
+        addressService.updateAddress(address);
+
+        return address;
+    }
+
+    private void searchCustomer(@RequestBody Address address) {
         Integer customerId = address.getCustomer().getCustomerId();
         Optional<Customer> optionalCustomer = customerService.getCustomerById(customerId);
         Customer customer = null;
@@ -49,14 +65,7 @@ public class AddressController {
         } else {
             throw new CustomerNotFoundException("Did not find customer id - " + customerId);
         }
-        addressService.createAddress(address);
-
-        return address;
     }
-
-    @PutMapping
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void updateAddress(@RequestBody Address address){ addressService.updateAddress(address);}
 
     @DeleteMapping(value = "/{addressId}")
     @ResponseStatus(value = HttpStatus.OK)

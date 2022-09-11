@@ -2,7 +2,7 @@ package com.revature.MKPG.entities;
 
 //import jakarta.validation.constraints.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -41,9 +41,12 @@ public class Customer {
     @Temporal(TemporalType.DATE)
     private Date created;
 
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JsonBackReference
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Address> address;
+
+    @OneToOne(mappedBy = "customer")
+    private Cart cart;
 
     public Customer() {
     }

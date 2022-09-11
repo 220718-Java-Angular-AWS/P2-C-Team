@@ -1,5 +1,7 @@
 package com.revature.MKPG.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,9 +23,10 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
+    @JsonBackReference
     private Cart cart;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "item_id")
     private Item item;
 

@@ -1,5 +1,7 @@
 package com.revature.MKPG.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
@@ -24,7 +26,6 @@ public class Item {
     @NotBlank(message = "Description cannot be blank.")
     private String description;
 
-
     @Column
     @Positive
     @DecimalMin(value= "0.01")
@@ -41,9 +42,10 @@ public class Item {
     private String rating;
 
     @OneToMany(mappedBy = "item")
+    @JsonBackReference
     private List<Order> orders;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "category_id")
     private Category category;
 

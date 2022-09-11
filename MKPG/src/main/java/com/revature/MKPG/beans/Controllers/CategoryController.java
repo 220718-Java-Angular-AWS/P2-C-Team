@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/categories")
+@RequestMapping(value = "/categories")
 public class CategoryController {
     private CategoryService categoryService;
 
@@ -19,11 +19,11 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping()
     @ResponseStatus(value = HttpStatus.OK)
     public List<Category> getCategories(){ return categoryService.getAllCategories();}
 
-    @RequestMapping(value = "/{categoryId}", method = RequestMethod.GET)
+    @GetMapping(value = "/{categoryId}")
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody Category getCategoryById(@PathVariable Integer categoryId){
         Optional<Category> optionalCategory = categoryService.getCategoryById(categoryId);
@@ -36,19 +36,22 @@ public class CategoryController {
         return optionalCategory.get();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void createCategory(Category category){
+    public Category createCategory(@RequestBody Category category){
         categoryService.createCategory(category);
+        return category;
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void updateCategory(Category category){
+    public Category updateCategory(@RequestBody Category category){
+
         categoryService.updateCategory(category);
+        return category;
     }
 
-    @RequestMapping(value = "/{categoryId}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{categoryId}")
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteCategory(@PathVariable(name = "categoryId") Integer id){ categoryService.deleteById(id);}
 }
