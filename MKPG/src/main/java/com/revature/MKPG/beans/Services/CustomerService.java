@@ -25,6 +25,7 @@ public class CustomerService {
         return repo.findById(id);
     }
 
+    public Optional<Customer> getCustomerByEmail(String email){ return repo.findByEmail(email);}
     public void createCustomer(Customer customer) {
         repo.save(customer);
     }

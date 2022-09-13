@@ -38,6 +38,22 @@ public class CustomerController {
         return customer;
     }
 
+    @GetMapping( "/email/{email}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public Customer getCustomerByEmail(@PathVariable String email) {
+        Optional<Customer> optionalCustomer = service.getCustomerByEmail(email);
+
+        Customer customer = null;
+
+        if(optionalCustomer.isPresent()) {
+            customer = optionalCustomer.get();
+        }else {
+            throw new CustomerNotFoundException( "Customer id " + email + " not found");
+        }
+
+        return customer;
+    }
+
     @GetMapping()
     @ResponseStatus(value = HttpStatus.OK)
     public List<Customer> getAllCustomers() {

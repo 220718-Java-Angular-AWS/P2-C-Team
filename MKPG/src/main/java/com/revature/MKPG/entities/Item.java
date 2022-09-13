@@ -7,6 +7,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -131,6 +132,14 @@ public class Item {
         return itemId.equals(item.itemId) && itemName.equals(item.itemName) && description.equals(item.description) && price.equals(item.price) && Objects.equals(discountedPrice, item.discountedPrice) && rating.equals(item.rating);
     }
 
+    public void addOrder(Order order) {
+        if (this.orders == null) {
+            this.orders = new ArrayList<>();
+        }
+        getOrders().add(order);
+        order.setItem(this);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(itemId, itemName, description, price, discountedPrice, rating);
@@ -145,7 +154,6 @@ public class Item {
                 ", price=" + price +
                 ", discountedPrice=" + discountedPrice +
                 ", rating='" + rating + '\'' +
-                ", order=" + orders +
                 ", category=" + category +
                 '}';
     }

@@ -45,6 +45,7 @@ public class CartController {
     @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void createCart(@RequestBody Cart cart){
+
         service.createCart(cart);
     }
 
@@ -54,7 +55,7 @@ public class CartController {
         service.updateCart(cart);
     }
 
-    @PostMapping(value = "/{cartId}")
+    @DeleteMapping(value = "/{cartId}")
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteCart(@PathVariable(name = "cartId") Integer id) {
         service.deleteById(id);

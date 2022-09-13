@@ -1,7 +1,5 @@
 package com.revature.MKPG.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 
 @Entity
@@ -23,7 +21,6 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
-    @JsonBackReference
     private Cart cart;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -33,8 +30,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer orderId, int quantity, String deliveryDate, String status) {
-        this.orderId = orderId;
+    public Order(int quantity, String deliveryDate, String status) {
         this.quantity = quantity;
         this.deliveryDate = deliveryDate;
         this.status = status;
@@ -48,12 +44,8 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public String getDeliveryDate() {

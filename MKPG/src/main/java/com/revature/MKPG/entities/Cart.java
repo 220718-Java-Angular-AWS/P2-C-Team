@@ -1,5 +1,7 @@
 package com.revature.MKPG.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +18,9 @@ public class Cart {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-     private List<Order> orders;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Order> orders;
 
     @Column
     private Integer total;

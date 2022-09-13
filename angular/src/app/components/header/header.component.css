@@ -1,0 +1,49 @@
+.container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.container > div {
+  padding: 0 3rem;
+}
+
+.logo {
+  padding-left: 0;
+}
+
+.menu {
+  flex-grow: 1;
+}
+
+.menu-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.menu-item {
+  padding: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.item-icon {
+  padding-left: 1.5rem;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.item-icon-customer {
+  font-size: 2.4rem;
+}
+
+.input-search {
+  background-color: var(--color-gray1);
+  border: 1px solid transparent;
+  border-radius: 5rem;
+  height: 4rem;
+  padding: .8rem 1.6rem;
+  width: 30rem;
+}
