@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ItemRepo extends MyRepoBase<Item, Integer> {
 
     @Query("SELECT i FROM item i WHERE i.itemName =:item_name")
-    Optional<Item> findBySimilarItemName(
+    Optional<Item> getItemByName(
             @Param("item_name") String itemName);
 
     @Query("SELECT i FROM item i WHERE i.price =:price")

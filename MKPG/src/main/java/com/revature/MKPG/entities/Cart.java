@@ -16,8 +16,8 @@ public class Cart {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-     private List<Order> orders;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
     @Column
     private Integer total;
