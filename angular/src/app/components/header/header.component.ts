@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {CustomerService} from "../../services/customer.service";
 import {CartService} from "../../services/cart.service";
-import {Cart} from "../../models/cart.model";
+import {Cart, createCartDTO} from "../../models/cart.model";
 
 @Component({
   selector: 'app-header',
@@ -25,13 +25,24 @@ export class HeaderComponent implements OnInit {
       this.loggedIn = true;
       cartService.getAllCarts().subscribe({
         next: data => {
-          const cart: any = data.find( cart => {
+          const cart: any = data.find(cart => {
             return cart.customer.customerId == localStorage.getItem('MKPG');
           })
           this.cart = cart;
-          this.cartService.setCart(cart);
+          if (cart) {
+            this.cartService.setCart(cart);
+          } else {
+            const newCart: createCartDTO = {
+              total: "0",
+              customer: {
+                customerId: `${localStorage.getItem('MKPG')}`,
+              }
+            }
+            this.cartService.createCart(newCart).subscribe({
+              next: data => this.cartService.setCart(data)
+            })
+          }
         }
-
       })
     }else {
       this.loggedIn = false;
@@ -82,5 +93,10 @@ export class HeaderComponent implements OnInit {
 
   onClickHome() {
     this.router.navigate(['/home'])
+  }
+
+  toCheckOut() {
+    this.dropDownCart = false;
+    this.router.navigate(['/checkout']);
   }
 }

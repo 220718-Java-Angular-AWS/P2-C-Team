@@ -3,6 +3,7 @@ import {CartService} from "../../services/cart.service";
 import {Cart} from "../../models/cart.model";
 import {OrderService} from "../../services/order.service";
 import {Order, orderOrderDTO} from "../../models/order.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -16,21 +17,13 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router,
   ) {
     this.cart = this.cartService.getCart();
-
-    this.orderService.getAllOrders().subscribe({
-      next: data => {
-        const orders: Order[] = data.filter( order => {
-          return order.cart.cartId == this.cart.cartId;
-        })
-
-        this.orderService.setOrders(orders);
-        this.orders = orders;
-      }
-    })
-
+    if (this.cart) {
+      this.setOrder(this.cart);
+    }
   }
 
   ngOnInit(): void {
@@ -39,6 +32,31 @@ export class CartComponent implements OnInit {
     this.orderService.myOrders$.subscribe({
       next: data => {
         this.orders = data;
+      }
+    })
+
+    this.cartService.myCart$.subscribe({
+      next: cart => {
+        if (cart) {
+          this.cart = cart;
+          this.setOrder(cart)
+        }
+      }
+    });
+  }
+
+
+  setOrder(cart:Cart) {
+    this.orderService.getAllOrders().subscribe({
+      next: data => {
+        const orders: Order[] = data.filter( order => {
+
+          console.log("333333333333" + cart.cartId);
+          return order.cart.cartId == cart.cartId;
+        })
+
+        this.orderService.setOrders(orders);
+        this.orders = orders;
       }
     })
   }
@@ -57,7 +75,7 @@ export class CartComponent implements OnInit {
       deliveryDate: "01-22-2022",
       status: "delivered",
       cart: {
-        cartId: 1,
+        cartId: 4,
         total: 100,
       },
       item: {

@@ -44,6 +44,7 @@ export class OrderService {
 
   setOrders(orders: Order[]) {
     this.orders = orders;
+    this.myOrders.next(this.orders);
   }
 
   getOrders() {

@@ -97,6 +97,38 @@ body {
   display: inline-block;
 }
 
+/****** Cart***********/
+
+.cart-img {
+}
+
+.cart-title {
+  margin-bottom: 1rem;
+}
+
+
+.cart-content {
+  flex-grow: 1;
+  padding-left: 2rem;
+  font-size: 1.3rem;
+}
+
+.cart-total {
+  margin-top: 2rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--color-font);
+}
+
+.btn-delete{
+  color: #ff0011;
+  float: right;
+  margin: 0 2rem 0 3rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+
 
 
 /****** Utilities ******/

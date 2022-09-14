@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './pages/home/home.component';
 import { AddressComponent } from './components/address/address.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CartComponent } from './components/cart/cart.component';
     ProfileComponent,
     HomeComponent,
     AddressComponent,
-    CartComponent
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

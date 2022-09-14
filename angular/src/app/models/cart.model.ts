@@ -7,6 +7,6 @@ export interface Cart {
   };
 }
 
-export interface createCartDTO extends Omit<Cart, 'cartId'> {
+export interface createCartDTO extends Omit<Cart, 'cartId' | 'checkOutDate'> {
 
 }

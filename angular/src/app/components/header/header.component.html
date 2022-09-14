@@ -1,4 +1,4 @@
-<header>
+<header [class.dropdown-open]="dropDownCart">
   <div class="container">
     <div class="logo">
       <div (click)="onClickHome()">MKPG</div>
@@ -33,8 +33,10 @@
         </li>
         <li class="item-icon" (mouseenter)="onMouseEnterCart()" (mouseleave)="onMouseleaveCart()" >
           <i class="bi bi-cart3"></i>
-          <div class="dropdown" *ngIf="dropDownCart">
+          <div class="dropdown-cart" [class.active]="dropDownCart">
+            <h3 class="cart-title">Cart</h3>
             <app-cart [cart]="cart"></app-cart>
+            <button (click)="toCheckOut()">Check Out</button>
           </div>
         </li>
       </ul>
