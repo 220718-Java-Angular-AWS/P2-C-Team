@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="home-container">
+      <app-item  *ngFor="let item of items" [items]="items">
+        <img src={{item.itemImage}} alt={{item.itemName}} width="500" height="600">
+      </app-item>
+  </div>
+</div>

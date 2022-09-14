@@ -1,46 +1,40 @@
-.profile-container {
+.home-container {
   max-width: 60rem;
   margin: auto;
   display: flex;
   flex-direction: column;
 }
 
-.profile-menu {
+.home-menu {
   display: flex;
   justify-content: center;
 }
 
-.profile-item{
+.home-item{
   cursor: pointer;
   padding: 2rem;
 }
 
-.profile-item:hover {
+.home-item:hover {
 
-}
-
-.active {
-  font-weight: 700;
-}
-
-.profile-content-item {
-  margin-top: 4rem;
-  text-align: center;
-}
-
-.profile-content-item > div {
-  padding-bottom: 3rem;
-}
-
-button {
-  width: 30rem;
 }
 
 .form-container {
   min-height: auto;
   margin-top: 3rem;
 }
-
-.address-item > div {
+.item-list > div {
   padding: 1rem;
+}
+.active {
+  font-weight: 700;
+}
+
+.home-content-item {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.home-content-item > div {
+  padding-bottom: 3rem;
 }

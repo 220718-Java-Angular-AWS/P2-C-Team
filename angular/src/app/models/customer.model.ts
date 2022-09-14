@@ -8,3 +8,7 @@ export interface Customer {
   birthDate: number,
   created: number,
 }
+
+export interface createCustomerDTO extends Omit<Customer, 'customerId'> {
+
+}

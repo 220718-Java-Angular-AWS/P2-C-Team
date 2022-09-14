@@ -8,7 +8,13 @@ import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ItemComponent } from './item/item.component';
+import {AppRoutingModule} from "./app-routing.module";
+import {ReactiveFormsModule} from "@angular/forms";
+import { HomeComponent } from './pages/home/home.component';
+import { AddressComponent } from './components/address/address.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ItemComponent } from '././components/item/item.component';
+import { BodyComponent } from './body/body.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +24,17 @@ import { ItemComponent } from './item/item.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    ItemComponent
+    HomeComponent,
+    AddressComponent,
+    CartComponent,
+    ItemComponent,
+    BodyComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

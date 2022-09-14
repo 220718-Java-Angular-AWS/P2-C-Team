@@ -1,8 +1,13 @@
 export interface Item {
-  itemId: Number | null,
-  itemName: String,
-  description: String,
-  price: Number,
-  discountedPrice: Number,
-  rating: String,
+  itemId: number | null,
+  itemName: string,
+  description: string,
+  price: number,
+  discountedPrice: number,
+  rating: string,
+  itemImage: string
+}
+
+export interface orderItemDTO extends Omit<Item, 'itemId'> {
+
 }
