@@ -1,7 +1,7 @@
 <header>
   <div class="container">
     <div class="logo">
-      MKPG
+      <div (click)="onClickHome()">MKPG</div>
     </div>
     <div class="menu">
       <ul class="menu-list">
@@ -16,7 +16,7 @@
     </div>
     <div class="second-menu">
       <ul class="menu-list">
-        <li class="item-icon item-icon-customer" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseleave()">
+        <li class="item-icon item-icon-customer" (mouseenter)="onMouseEnterProfile()" (mouseleave)="onMouseleaveProfile()">
           <i class="bi bi-person"></i>
           <div class="dropdown" *ngIf="dropDown">
             <ul *ngIf="loggedIn;else dropDown2">
@@ -31,7 +31,12 @@
             </ng-template>
           </div>
         </li>
-        <li class="item-icon"><i class="bi bi-cart3"></i></li>
+        <li class="item-icon" (mouseenter)="onMouseEnterCart()" (mouseleave)="onMouseleaveCart()" >
+          <i class="bi bi-cart3"></i>
+          <div class="dropdown" *ngIf="dropDownCart">
+            <app-cart [cart]="cart"></app-cart>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

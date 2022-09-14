@@ -12,6 +12,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './pages/home/home.component';
 import { AddressComponent } from './components/address/address.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AddressComponent } from './components/address/address.component';
     RegisterComponent,
     ProfileComponent,
     HomeComponent,
-    AddressComponent
+    AddressComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

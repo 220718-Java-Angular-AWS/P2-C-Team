@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {CustomerService} from "../../services/customer.service";
+import {CartService} from "../../services/cart.service";
+import {Cart} from "../../models/cart.model";
 
 @Component({
   selector: 'app-header',
@@ -10,14 +12,27 @@ import {CustomerService} from "../../services/customer.service";
 export class HeaderComponent implements OnInit {
 
   dropDown: boolean = false;
+  dropDownCart: boolean = false;
   loggedIn: boolean;
+  cart: any;
 
   constructor(
     private router: Router,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private cartService: CartService
   ) {
     if (localStorage.getItem('MKPG')) {
       this.loggedIn = true;
+      cartService.getAllCarts().subscribe({
+        next: data => {
+          const cart: any = data.find( cart => {
+            return cart.customer.customerId == localStorage.getItem('MKPG');
+          })
+          this.cart = cart;
+          this.cartService.setCart(cart);
+        }
+
+      })
     }else {
       this.loggedIn = false;
     }
@@ -33,12 +48,20 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  onMouseEnter(){
+  onMouseEnterProfile(){
     this.dropDown = true;
   }
 
-  onMouseleave(){
+  onMouseleaveProfile(){
     this.dropDown = false;
+  }
+
+  onMouseEnterCart() {
+    this.dropDownCart = true;
+  }
+
+  onMouseleaveCart() {
+    this.dropDownCart = false;
   }
 
   onClickLogin(){
@@ -55,5 +78,9 @@ export class HeaderComponent implements OnInit {
 
   onClickLogOut() {
     this.customerService.logout();
+  }
+
+  onClickHome() {
+    this.router.navigate(['/home'])
   }
 }
