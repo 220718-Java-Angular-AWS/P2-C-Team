@@ -1,6 +1,7 @@
 package com.revature.MKPG.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
@@ -9,7 +10,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
-
+@Builder
 @Entity(name = "item")
 public class Item {
     @Id
@@ -57,6 +58,17 @@ public class Item {
         this.price = price;
         this.discountedPrice = discountedPrice;
         this.rating = rating;
+    }
+
+    public Item(Integer itemId, String itemName, String description, Double price, Double discountedPrice, String rating, List<Order> orders, Category category) {
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.description = description;
+        this.price = price;
+        this.discountedPrice = discountedPrice;
+        this.rating = rating;
+        this.orders = orders;
+        this.category = category;
     }
 
     public Integer getItemId() {

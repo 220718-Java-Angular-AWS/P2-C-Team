@@ -3,6 +3,7 @@ package com.revature.MKPG.beans.Controllers;
 import com.revature.MKPG.beans.Services.ItemService;
 import com.revature.MKPG.entities.Item;
 import com.revature.MKPG.exceptions.CustomerNotFoundException;
+import com.revature.MKPG.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -70,6 +71,19 @@ public class ItemController{
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody List<Item> getAllItems() {
         return service.getAllItems();
+    }
+
+    @GetMapping("/all")
+    @ResponseStatus(value = HttpStatus.OK)
+    public @ResponseBody List<Item> getAllItemsByPrice(@PathVariable double price) {
+        Optional<List<Item>> itemList = service.findByPrice(price);
+        List<Item> items = null;
+        if (itemList.isPresent()){
+            items = itemList.get();
+        }else {
+            throw new ResourceNotFoundException("Item not found");
+        }
+        return items;
     }
 
     @PostMapping()

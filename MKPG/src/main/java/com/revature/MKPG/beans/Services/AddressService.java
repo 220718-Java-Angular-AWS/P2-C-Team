@@ -25,12 +25,12 @@ public class AddressService {
         return addressRepository.findById(id);
     }
 
-    public void createAddress(Address address){
-        addressRepository.save(address);
+    public Address createAddress(Address address){
+        return addressRepository.save(address);
     }
 
-    public void updateAddress(Address address){
-        addressRepository.save(address);
+    public Address updateAddress(Address address){
+        return addressRepository.save(address);
     }
 
     public void deleteById(Integer id){ addressRepository.deleteById(id);}

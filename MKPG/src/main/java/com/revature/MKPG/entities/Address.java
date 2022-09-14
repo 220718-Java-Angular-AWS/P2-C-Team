@@ -1,10 +1,11 @@
 package com.revature.MKPG.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.Objects;
-
+@Builder
 @Entity(name = "addresses")
 public class Address {
     @Id
