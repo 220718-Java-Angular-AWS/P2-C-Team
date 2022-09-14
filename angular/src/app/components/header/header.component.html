@@ -16,7 +16,21 @@
     </div>
     <div class="second-menu">
       <ul class="menu-list">
-        <li class="item-icon item-icon-customer"><i class="bi bi-person"></i></li>
+        <li class="item-icon item-icon-customer" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseleave()">
+          <i class="bi bi-person"></i>
+          <div class="dropdown" *ngIf="dropDown">
+            <ul *ngIf="loggedIn;else dropDown2">
+              <li (click)="onClickProfile()">Profile</li>
+              <li (click)="onClickLogOut()">LogOut</li>
+            </ul>
+            <ng-template #dropDown2>
+              <ul>
+                <li (click)="onClickLogin()">Login</li>
+                <li (click)="onClickRegister()">Register</li>
+              </ul>
+            </ng-template>
+          </div>
+        </li>
         <li class="item-icon"><i class="bi bi-cart3"></i></li>
       </ul>
     </div>
