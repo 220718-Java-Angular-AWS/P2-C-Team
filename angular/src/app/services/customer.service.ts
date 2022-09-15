@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
-import {Customer} from "../models/customer.model";
+import {createCustomerDTO, Customer} from "../models/customer.model";
 import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
+
+  private _url: String = `http://localhost:8080/api/customers`;
+  private _userId = new BehaviorSubject<String | null>(localStorage.getItem('MKPG'));
+
+  userId$ = this._userId.asObservable();
 
   private _customer: Customer = {
     customerId: null,
@@ -26,7 +32,30 @@ export class CustomerService {
     return this._customer;
   }
 
-  getCustomerById() {
-    return this.http.get<Customer>("http://localhost:8080/api/customers/1");
+  login(customerId: String) {
+    localStorage.setItem( 'MKPG', `${customerId}`);
+    this._userId.next( customerId );
   }
+
+  logout(){
+    localStorage.removeItem('MKPG');
+    this._userId.next(null);
+  }
+
+  getCustomerById(id: String) {
+    return this.http.get<Customer>(`${this._url}/${id}`);
+  }
+
+  getCustomerByEmail(email: String) {
+    return this.http.get<Customer>(`${this._url}/email/${email}`)
+  }
+
+  createCustomer( customer: createCustomerDTO){
+    return this.http.post<Customer>( `${this._url}`, customer);
+  }
+
+  updateCustomer(customer: Customer) {
+    return this.http.put<Customer>( `${this._url}`, customer);
+  }
+
 }

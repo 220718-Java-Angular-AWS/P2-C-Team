@@ -1,7 +1,7 @@
-<header>
+<header [class.dropdown-open]="dropDownCart">
   <div class="container">
     <div class="logo">
-      MKPG
+      <div (click)="onClickHome()" class="item-icon"><img src="assets/images/MKPG.jpg" alt="MKPG" height="75" width="75"></div>
     </div>
     <div class="menu">
       <ul class="menu-list">
@@ -16,8 +16,29 @@
     </div>
     <div class="second-menu">
       <ul class="menu-list">
-        <li class="item-icon item-icon-customer"><i class="bi bi-person"></i></li>
-        <li class="item-icon"><i class="bi bi-cart3"></i></li>
+        <li class="item-icon item-icon-customer" (mouseenter)="onMouseEnterProfile()" (mouseleave)="onMouseleaveProfile()">
+          <i class="bi bi-person"></i>
+          <div class="dropdown" *ngIf="dropDown">
+            <ul *ngIf="loggedIn;else dropDown2">
+              <li (click)="onClickProfile()">Profile</li>
+              <li (click)="onClickLogOut()">LogOut</li>
+            </ul>
+            <ng-template #dropDown2>
+              <ul>
+                <li (click)="onClickLogin()">Login</li>
+                <li (click)="onClickRegister()">Register</li>
+              </ul>
+            </ng-template>
+          </div>
+        </li>
+        <li class="item-icon" (mouseenter)="onMouseEnterCart()" (mouseleave)="onMouseleaveCart()" >
+          <i class="bi bi-cart3"></i>
+          <div class="dropdown-cart" [class.active]="dropDownCart">
+            <h3 class="cart-title">Cart</h3>
+            <app-cart [cart]="cart"></app-cart>
+            <button (click)="toCheckOut()">Check Out</button>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

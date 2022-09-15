@@ -16,10 +16,13 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customerService.getCustomerById()
-      .subscribe(data => {
-        this.customer = data;
-      })
+    const customerId = localStorage.getItem('MKPG');
+    if (customerId) {
+      this.customerService.getCustomerById(customerId)
+        .subscribe(data => {
+          this.customer = data;
+        })
+    }
   }
 
 }
