@@ -1,9 +1,10 @@
 package com.revature.MKPG.beans.Controllers;
 
+import com.revature.MKPG.beans.Services.CategoryService;
 import com.revature.MKPG.beans.Services.ItemService;
+import com.revature.MKPG.entities.Category;
 import com.revature.MKPG.entities.Item;
 import com.revature.MKPG.exceptions.CustomerNotFoundException;
-import com.revature.MKPG.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,13 @@ import java.util.Optional;
 @RequestMapping(value = "/item")
 public class ItemController{
     private ItemService service;
+    private CategoryService categoryService;
 
     @Autowired
-    public ItemController(ItemService itemService){
+    public ItemController(ItemService itemService, CategoryService categoryService){
+
         this.service = itemService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/id/{itemId}")
@@ -34,12 +38,6 @@ public class ItemController{
         }else {
             throw new CustomerNotFoundException( "Item id " + itemId + " not found");
         }
-        /*
-        try{
-            optionalUser.isPresent();
-        }catch(Exception e){
-            System.out.println(e);
-        }*/
         return item;
     }
 
@@ -47,7 +45,7 @@ public class ItemController{
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody Item getItemByName(@PathVariable String itemName) {
         System.out.println(itemName);
-        Optional<Item> optionalItem = service.findByName(itemName);
+        Optional<Item> optionalItem = service.getByItemName(itemName);
 
         Item item = null;
 
@@ -56,14 +54,6 @@ public class ItemController{
         }else {
             throw new CustomerNotFoundException( "Item name " + itemName + " not found");
         }
-       /* Optional<Item> optionalUser = service.findByName(itemName);
-        try{
-            optionalUser.isPresent();
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
-        */
         return item;
     }
 
@@ -73,28 +63,42 @@ public class ItemController{
         return service.getAllItems();
     }
 
-    @GetMapping("/all")
-    @ResponseStatus(value = HttpStatus.OK)
-    public @ResponseBody List<Item> getAllItemsByPrice(@PathVariable double price) {
-        Optional<List<Item>> itemList = service.findByPrice(price);
-        List<Item> items = null;
-        if (itemList.isPresent()){
-            items = itemList.get();
-        }else {
-            throw new ResourceNotFoundException("Item not found");
-        }
-        return items;
-    }
 
     @PostMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void createItem(@Valid @RequestBody Item item){
+        Integer categoryId = item.getCategory().getCategoryId();
+        Optional<Category> optionalCategory = categoryService.getCategoryById(categoryId);
+
+        Category category = null;
+
+        if (optionalCategory.isPresent()) {
+            category = optionalCategory.get();
+            category.addItems(item);
+
+        } else {
+            throw new CustomerNotFoundException("Did not find category id - " + categoryId);
+        }
+        System.out.println(item);
         service.createItem(item);
     }
 
-    @PutMapping()
+    @PutMapping("/id/{itemId}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void updateItem(@Valid @RequestBody Item item){
+        Integer categoryId = item.getCategory().getCategoryId();
+        Optional<Category> optionalCategory = categoryService.getCategoryById(categoryId);
+
+        Category category = null;
+
+        if (optionalCategory.isPresent()) {
+            category = optionalCategory.get();
+            category.addItems(item);
+
+        } else {
+            throw new CustomerNotFoundException("Did not find category id - " + categoryId);
+        }
+        System.out.println(item);
         service.updateItem(item);
     }
 

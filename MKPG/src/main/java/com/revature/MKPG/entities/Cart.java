@@ -19,8 +19,8 @@ public class Cart {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-     private List<Order> orders;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
     @Column
     private Integer total;
@@ -36,7 +36,6 @@ public class Cart {
         this.total = total;
         this.checkOutDate = checkOutDate;
     }
-
     public Cart(Integer cartId, Customer customer, List<Order> orders, Integer total, Date checkOutDate) {
         this.cartId = cartId;
         this.customer = customer;

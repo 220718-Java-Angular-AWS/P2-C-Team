@@ -86,10 +86,10 @@ class ItemServiceTest {
 
     @DisplayName("JUnit test for FindByName method")
     @Test
-    void testForFindByName() {
-        given(itemRepo.findByItemName("Game1")).willReturn(Optional.of(item));
+    void testForGetItemByName() {
+        given(itemRepo.getItemByName("Game1")).willReturn(Optional.of(item));
 
-        Item savedItem = itemService.findByName(item.getItemName()).get();
+        Item savedItem = itemService.getByItemName(item.getItemName()).get();
 
         assertThat(savedItem).isNotNull();
     }

@@ -24,17 +24,9 @@ public class ItemService {
     public Optional<Item> getItemById(Integer id){
         return repo.findById(id);
     }
-
-//    public Optional<Item> findByName(String itemName){
-//        return repo.findBySimilarItemName(itemName);
-//    }
-public Optional<Item> findByName(String itemName){
-    return repo.findByItemName(itemName);
+    public Optional<Item> getByItemName(String itemName){
+    return repo.getItemByName(itemName);
 }
-
-    public Optional<List<Item>>  findByPrice(double price){
-        return repo.findAllByPrice(price);
-    }
 
     public Item createItem(Item item){ return repo.save(item); }
 

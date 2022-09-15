@@ -1,13 +1,16 @@
 package com.revature.MKPG.beans.Controllers;
 
+import com.revature.MKPG.beans.Services.CartService;
+import com.revature.MKPG.beans.Services.ItemService;
 import com.revature.MKPG.beans.Services.OrderService;
+import com.revature.MKPG.entities.Cart;
+import com.revature.MKPG.entities.Item;
 import com.revature.MKPG.entities.Order;
 import com.revature.MKPG.exceptions.CustomerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +18,15 @@ import java.util.Optional;
 @RequestMapping(value = "/orders")
 public class OrderController {
     private OrderService service;
+    private CartService cartService;
+    private ItemService itemService;
 
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, CartService cartService, ItemService itemService) {
+
         this.service = orderService;
+        this.cartService = cartService;
+        this.itemService = itemService;
     }
 
     @GetMapping( "/{orderId}")
@@ -45,16 +53,65 @@ public class OrderController {
 
     @PostMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public Order createOrder(@Valid @RequestBody Order order) {
+    public Order createOrder(@RequestBody Order order) {
+        Integer cartId = order.getCart().getCartId();
+        Integer itemId = order.getItem().getItemId();
+        Optional<Cart> optionalCart = cartService.getCartById(cartId);
+        Optional<Item> optionalItem = itemService.getItemById(itemId);
+
+        Cart cart = null;
+        Item item = null;
+
+        if (optionalCart.isPresent()) {
+            cart = optionalCart.get();
+            cart.addOrder(order);
+
+        } else {
+            throw new CustomerNotFoundException("Did not find cart id - " + cartId);
+        }
+
+        if (optionalItem.isPresent()) {
+            item = optionalItem.get();
+            item.addOrder(order);
+
+        } else {
+            throw new CustomerNotFoundException("Did not find item id - " + itemId);
+        }
+
+
         service.createOrder(order);
+
         return order;
     }
 
     @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public Order updateOrder(@RequestBody Order order) {
+    public void updateOrder(@RequestBody Order order) {
+        Integer cartId = order.getCart().getCartId();
+        Integer itemId = order.getItem().getItemId();
+        Optional<Cart> optionalCart = cartService.getCartById(cartId);
+        Optional<Item> optionalItem = itemService.getItemById(itemId);
+
+        Cart cart = null;
+        Item item = null;
+
+        if (optionalCart.isPresent()) {
+            cart = optionalCart.get();
+            cart.addOrder(order);
+
+        } else {
+            throw new CustomerNotFoundException("Did not find cart id - " + cartId);
+        }
+
+        if (optionalItem.isPresent()) {
+            item = optionalItem.get();
+            item.addOrder(order);
+
+        } else {
+            throw new CustomerNotFoundException("Did not find item id - " + itemId);
+        }
+
         service.updateOrder(order);
-        return order;
     }
 
     @DeleteMapping("/{orderId}")

@@ -155,8 +155,6 @@ public class Customer {
         address.setCustomer(this);
     }
 
-
-
     @Override
     public String toString() {
         return "Customer{" +
