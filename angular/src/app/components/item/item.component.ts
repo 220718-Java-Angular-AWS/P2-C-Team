@@ -10,7 +10,11 @@ import { ItemService } from '../../services/item.service';
 })
 export class ItemComponent implements OnInit {
 
-  @Input() items: Item[] =[];
+  items: Item[] =[];
+  nintendoForm: boolean = false;
+  playstationForm: boolean = false;
+  pcForm: boolean = false;
+  xboxForm: boolean = false;
 
   form = new FormGroup({
     itemName: new FormControl('', [Validators.required]),
@@ -30,5 +34,30 @@ export class ItemComponent implements OnInit {
     this.itemService.items$.subscribe({
       next: data => this.items = data
     })
+    }
+
+    onClickItem(active: String){
+      if(active === 'home'){
+        this.nintendoForm = false;
+        this.playstationForm = false;
+        this.pcForm = false;
+        this.xboxForm = false;
+      }
+    }
+    save(){
+
+    }
+
+    addNintendoForm(){
+      this.nintendoForm = true;
+    }
+    addPlaystationForm(){
+      this.playstationForm = true;
+    }
+    addPCForm(){
+      this.pcForm = true;
+    }
+    addXBoxForm(){
+      this.xboxForm = true;
     }
   }

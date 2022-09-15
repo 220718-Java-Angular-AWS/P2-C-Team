@@ -114,3 +114,20 @@ body {
 .u-strong{
   font-weight: 700;
 }
+
+a, body, div,  font, form, h1, h2, h3, h4, h5, h6, html, img, label, li, ol, p, strong, table, tbody, td, tfoot, th, thead, tr, tt, ul{
+  -webkit-text-size-adjust:none;
+  border:0;
+  font-family:inherit;
+  font-style: normal;
+  font-weight:inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  text-decoration: 0;
+}
+a{
+   color: inherit;
+   -webkit-tap-highlight-color: rgb(255, 255, 255);
+   cursor: pointer
+}

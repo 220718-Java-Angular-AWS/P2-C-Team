@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { ItemComponent } from '../../components/item/item.component';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from '../../services/item.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +12,7 @@ import { ItemService } from '../../services/item.service';
 })
 export class HomeComponent implements OnInit {
   items: Item[] = [];
-  nintendoForm: boolean = false;
-  playstationForm: boolean = false;
-  pcForm: boolean = false;
-  xboxForm: boolean = false;
+  router: Router;
 
   form = new FormGroup({
     itemName: new FormControl('', [Validators.required]),
@@ -23,10 +21,12 @@ export class HomeComponent implements OnInit {
     discountedPrice: new FormControl(''),
     rating: new FormControl('', [Validators.required]),
     itemImage: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required])
   })
 
 
-  constructor(private itemService: ItemService) {
+  constructor(private itemService: ItemService,
+    private _router: Router) {
       this.itemService.getAllItems().subscribe({
         next: data => {
           console.log(data);
@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
         },
         error: data => console.log(data)
       });
+      this.router = _router;
    }
 
 
@@ -43,29 +44,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  onClickItem(active: String){
-    if(active === 'home'){
-      this.nintendoForm = false;
-      this.playstationForm = false;
-      this.pcForm = false;
-      this.xboxForm = false;
-    }
+  itemPage(){
+    this.router.navigate(['/item']);
   }
-  save(){
-
-  }
-
-  addNintendoForm(){
-    this.nintendoForm = true;
-  }
-  addPlaystationForm(){
-    this.playstationForm = true;
-  }
-  addPCForm(){
-    this.pcForm = true;
-  }
-  addXBoxForm(){
-    this.xboxForm = true;
-  }
-
 }

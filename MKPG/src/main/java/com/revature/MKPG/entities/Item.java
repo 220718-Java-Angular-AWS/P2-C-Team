@@ -167,8 +167,7 @@ public class Item {
         return Objects.equals(itemId, item.itemId) && itemName.equals(item.itemName) && description.equals(item.description) && price.equals(item.price) && discountedPrice.equals(item.discountedPrice) && rating.equals(item.rating) && itemImage.equals(item.itemImage);
     }
 
-    @Override
-    public int hashCode() {
+    @Override   public int hashCode() {
         return Objects.hash(itemId, itemName, description, price, discountedPrice, rating, itemImage);
     }
 
