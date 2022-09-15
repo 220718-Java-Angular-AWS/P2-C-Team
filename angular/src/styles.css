@@ -126,8 +126,167 @@ a, body, div,  font, form, h1, h2, h3, h4, h5, h6, html, img, label, li, ol, p, 
   padding: 0;
   text-decoration: 0;
 }
+
 a{
    color: inherit;
    -webkit-tap-highlight-color: rgb(255, 255, 255);
    cursor: pointer
+}
+
+.page-section:first-child{margin-top:0;}
+
+.page-section{
+  margin-top:60px;
+position:relative;
+font-size: 13px;
+line-height: 1.36;
+}
+
+.section{
+  display:block;
+}
+
+.row::before{
+  clear: both;
+  content: " ";
+  display: table;
+}
+
+.row.has-side-left>.row-body{
+  margin-left:234px;
+}
+
+.row-body-inner{
+  float:left;
+  position: relative;
+  width: 100%;
+}
+
+.row-body-border{
+  border-left: 1px;
+  padding-left: 20px;
+}
+
+.item-list-wrap{
+  position: relative;
+}
+
+.item-list-wrap::before{
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.item-cells-wrap.border-cells{
+  border-left: 1px;
+  border-width: 1px 0 0 1px;
+}
+
+.item-cell, .item-cells-wrap{
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+}
+
+.item-cells-wrap{
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
+.item-cells-wrap.four-cells.expulsion-one-cell>.item-cell{
+    width: 20%;
+}
+
+.item-cells-wrap.border-cells>.item-cell {
+  border: 1px ;
+  border-width: 0 1px 1px 0;
+  padding: 30px;
+}
+
+.item-cell {
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 2;
+  min-height: 90px;
+  width: 100%;
+}
+
+.item-cell .item-container {
+  box-sizing: border-box;
+  padding: 20;
+  position: relative;
+}
+
+.item-container{
+  display: block;
+}
+
+.item-container, .item-img{
+  display: block;
+}
+
+.item-cell .item-container:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.item-icon {
+  padding-left: 1.5rem;
+  cursor: pointer;
+  font-size: 2rem;
+  position: relative;
+  bottom: 0;
+  display: block;
+  margin: auto;
+  max-height: 240px;
+  max-width: 150px;
+  position: relative;
+  right: 0;
+  top: 0;
+}
+
+.item-cell .item-img{
+  max-width: 480px;
+}
+
+.items-grid-view .item-img{
+  margin-bottom: 100px;
+}
+
+.items-grid-view .itemfeatures{
+  display: none;
+}
+
+.item-img{
+  max-width: 240px;
+  position: relative;
+  text-align: center;
+}
+
+.item-img:before{
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+  padding-top: 18%;
+  padding-left: 10%;
+  width: 100%;
+}
+
+.item-features:last-child{
+  margin-bottom:0;
+}
+
+.item-features{
+  font-size: 24px;
+  list-style: disc outside;
+  margin: 15px 0 15px 15px;
+}
+
+ul{
+  list-style: none;
 }

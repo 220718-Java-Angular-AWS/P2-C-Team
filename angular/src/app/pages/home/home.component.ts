@@ -44,7 +44,9 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  itemPage(){
+  itemPage(data: number){
+    localStorage.setItem(`${data}.format`, 'itemID')
     this.router.navigate(['/item']);
+    console.log(data);
   }
 }

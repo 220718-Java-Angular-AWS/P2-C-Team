@@ -13,6 +13,7 @@ import { Item } from 'src/app/models/item.model';
 })
 export class HeaderComponent implements OnInit {
 
+  active = 'home';
   dropDown: boolean = false;
   dropDownCart: boolean = false;
   loggedIn: boolean;
@@ -104,6 +105,7 @@ export class HeaderComponent implements OnInit {
     this.dropDownCart = false;
     this.router.navigate(['/checkout']);
   }
+
   getItemByName(event: any) {
     this.itemService.getItemByName(event)
     this.itemService.items$.subscribe({

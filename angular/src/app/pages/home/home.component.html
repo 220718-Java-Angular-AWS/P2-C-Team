@@ -1,41 +1,23 @@
 <div class="Featured"></div>
 <div class="page-section">
   <div class="row has-side-left">
-    .
     <div class="row-body">
       <div class="row-body-inner">
         <div class="row-body-border">
           <div class="item-list-wrap">
-            <div class="item-cells-wrap border-cell item-grid-view four-cells expulsion-one-cell"
-              *ngFor="let item of items">
+            <div class="item-cells-wrap border-cell item-grid-view four-cells expulsion-one-cell">
               <div class="item-cell" *ngFor="let item of items">
                 <div class="item-container">
-                  <div class="item-img">
-                    <a (click)="itemPage()" class="item-icon">
-                      <img src="{{ item.itemImage }}" alt="{{ item.itemName }}" />
-                    </a>
+                    <a (click)=" itemPage(item.itemId)" class="item-img">
+                      <img src="{{ item.itemImage }}" alt="{{ item.itemName }}" width="240px" height="480px">
                     <ul class="item-features">
                       <li>
-                        <strong>Brand:</strong> {{ item.category.console }}
+                        <strong>Console:</strong> {{ item.category.console }}
                       </li>
                       <li><strong>ESRB Rating:</strong>{{ item.rating }}</li>
                       <li><strong>Genre:</strong>{{ item.category.name }}</li>
-                    </ul>
-                  </div>
-                  <div class="item-action">
-                    <ul class="price">
-                      <li class="price-was"></li>
-                      <li class="price-map">&nbsp;</li>
-                      <li class="price-current">
-                        <span class="price-current-label"></span>$<strong>{{
-                          item.price
-                          }}</strong>
-                      </li>
-                      <li class="price-ship">Free Shipping</li>
-                    </ul>
-                    <div class="item-operate">
-                      <div class="item-button-area"></div>
-                    </div>
+                      <li class="price"><strong>${{ item.price }}</strong></li>
+                    </ul></a>
                   </div>
                 </div>
               </div>
@@ -45,4 +27,4 @@
       </div>
     </div>
   </div>
-</div>
+
