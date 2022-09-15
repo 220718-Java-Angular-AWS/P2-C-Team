@@ -36,6 +36,13 @@ export class OrderService {
     this.myOrders.next(this.orders);
   }
 
+  updateMyOrder (data: Order) {
+    const orderIndex = this.orders.findIndex( order => order.orderId === data.orderId);
+    this.orders.splice(orderIndex, 1);
+    this.orders.push(data);
+    this.myOrders.next(this.orders);
+  }
+
   deleteMyOrder(id: number) {
     const orderIndex = this.orders.findIndex( order => order.orderId === id);
     this.orders.splice(orderIndex, 1);

@@ -1,10 +1,12 @@
-<div *ngFor="let order of orders">
-  <div class="cart-item">
-    <picture class="cart-img">
+<div class="container">
+  <div class="item-purchased" *ngFor="let order of orders">
+    <picture>
       <img src="assets/images/FIFA-22-Nintendo-Switch.jpg">
     </picture>
-    <div class="cart-content">
-      <h4 class="cart-title">{{order.item.itemName}} <button class="btn-delete" (click)="deleteItem(order.orderId)">X</button></h4>
+    <div class="item-container">
+      <div class="title">
+        {{order.item.itemName}}
+      </div>
       <div class="quantity">
         <table>
           <tr>
@@ -20,8 +22,10 @@
             <td>{{((+order.quantity) * (+order.item.price)) | currency}}</td>
           </tr>
         </table>
+
+
       </div>
+
     </div>
   </div>
 </div>
-<button (click)="addItem()">add Item</button>

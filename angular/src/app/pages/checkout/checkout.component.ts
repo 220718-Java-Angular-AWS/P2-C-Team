@@ -83,7 +83,7 @@ export class CheckoutComponent implements OnInit {
 
         this.orderService.updateOrder( myOrder )
           .subscribe(data => {
-            this.orderService.deleteMyOrder(myOrder.orderId);
+            this.orderService.updateMyOrder(myOrder);
           })
       })
 

@@ -46,9 +46,9 @@
         <li class="item-icon" >
           <div (click)="toggleCart()" ><i class="bi bi-cart3"></i></div>
           <div class="dropdown-cart" [class.active]="dropDownCart">
-            <h3 class="cart-title">Cart <button (click)="toggleCart()">X</button></h3>
+            <h3 class="cart-title">Cart <button (click)="toggleCart()" class="btn-close">X</button></h3>
             <app-cart [cart]="cart"></app-cart>
-            <button (click)="toCheckOut()">Check Out</button>
+            <button (click)="toCheckOut()" class="btn">Check Out</button>
           </div>
         </li>
       </ul>

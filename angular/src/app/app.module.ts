@@ -15,6 +15,7 @@ import { AddressComponent } from './components/address/address.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ThanksComponent } from './pages/thanks/thanks.component';
+import { PurchasesComponent } from './components/purchases/purchases.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ThanksComponent } from './pages/thanks/thanks.component';
     AddressComponent,
     CartComponent,
     CheckoutComponent,
-    ThanksComponent
+    ThanksComponent,
+    PurchasesComponent
   ],
     imports: [
         BrowserModule,

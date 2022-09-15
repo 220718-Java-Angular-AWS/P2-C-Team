@@ -172,3 +172,16 @@
   margin-bottom: 3rem;
   align-items: center;
 }
+
+
+.btn-close {
+  right: 5rem;
+  color: #fff;
+  background: red;
+  border: 0;
+  position: absolute;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+}
+
