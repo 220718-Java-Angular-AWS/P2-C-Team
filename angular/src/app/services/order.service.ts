@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Order, orderOrderDTO} from "../models/order.model";
+import {Order, orderOrderDTO, OrderU} from "../models/order.model";
 import {BehaviorSubject} from "rxjs";
 
 @Injectable({
@@ -50,6 +50,11 @@ export class OrderService {
   getOrders() {
     return this.orders;
   }
+
+  updateOrder( order: OrderU ) {
+    return this.http.put(`${this._url}`, order);
+  }
+
 
 
 }

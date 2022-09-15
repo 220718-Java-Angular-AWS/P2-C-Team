@@ -29,12 +29,6 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.cart = this.cartService.getCart();
 
-    this.orderService.myOrders$.subscribe({
-      next: data => {
-        this.orders = data;
-      }
-    })
-
     this.cartService.myCart$.subscribe({
       next: cart => {
         if (cart) {
@@ -43,20 +37,28 @@ export class CartComponent implements OnInit {
         }
       }
     });
+
+    this.orderService.myOrders$.subscribe({
+      next: data => {
+        console.log( "cart orders: " + data);
+        this.orders = data.filter( order => order.status != 'shipped');
+      }
+    })
   }
 
 
   setOrder(cart:Cart) {
     this.orderService.getAllOrders().subscribe({
       next: data => {
+        // @ts-ignore
         const orders: Order[] = data.filter( order => {
-
-          console.log("333333333333" + cart.cartId);
-          return order.cart.cartId == cart.cartId;
+          if (order.cart) {
+            return order.cart.cartId == cart.cartId;
+          }
         })
 
         this.orderService.setOrders(orders);
-        this.orders = orders;
+        this.orders = orders.filter(order => order.status != 'shipped');
       }
     })
   }
@@ -73,13 +75,13 @@ export class CartComponent implements OnInit {
     const order: orderOrderDTO = {
       quantity: "5",
       deliveryDate: "01-22-2022",
-      status: "delivered",
+      status: "inCart",
       cart: {
-        cartId: 4,
+        cartId: 3,
         total: 100,
       },
       item: {
-        itemId: "19",
+        itemId: "11",
         itemName: "",
         price: 0,
         discountedPrice: 0,

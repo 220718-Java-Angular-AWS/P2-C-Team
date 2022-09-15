@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {CustomerService} from "../../services/customer.service";
 import {CartService} from "../../services/cart.service";
 import {Cart, createCartDTO} from "../../models/cart.model";
+import {ItemService} from "../../item.service";
+import {Item} from "../../models/item.model";
 
 @Component({
   selector: 'app-header',
@@ -11,15 +13,20 @@ import {Cart, createCartDTO} from "../../models/cart.model";
 })
 export class HeaderComponent implements OnInit {
 
+  searchItem:string = "";
+  showSearch:boolean = false;
   dropDown: boolean = false;
   dropDownCart: boolean = false;
   loggedIn: boolean;
   cart: any;
+  delayTimer:any;
+  itemArr: Item[] | any = [];
 
   constructor(
     private router: Router,
     private customerService: CustomerService,
-    private cartService: CartService
+    private cartService: CartService,
+    private itemService: ItemService
   ) {
     if (localStorage.getItem('MKPG')) {
       this.loggedIn = true;
@@ -57,6 +64,7 @@ export class HeaderComponent implements OnInit {
         this.loggedIn = false;
       }
     })
+
   }
 
   onMouseEnterProfile(){
@@ -98,5 +106,39 @@ export class HeaderComponent implements OnInit {
   toCheckOut() {
     this.dropDownCart = false;
     this.router.navigate(['/checkout']);
+  }
+
+  toggleCart() {
+    if(this.dropDownCart === false) {
+      this.dropDownCart = true;
+    }else {
+      this.dropDownCart = false;
+    }
+  }
+
+  onClickShowSearch(){
+    if(this.showSearch === false) {
+      this.showSearch = true;
+    }
+  }
+
+  hideSearch() {
+    this.showSearch = false;
+    this.searchItem = "";
+  }
+
+  getItems() {
+    clearTimeout(this.delayTimer);
+    this.delayTimer = setTimeout(  () => {
+      if (this.searchItem.length > 0) {
+        this.itemService.getAllItems().subscribe({
+          next: data => {
+            const items = data.filter(item => item.itemName.search(new RegExp(`${this.searchItem}`)) >= 0)
+            this.itemArr = items;
+            console.log(items)
+          }
+        })
+      }
+    }, 1500);
   }
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomerService} from "../../services/customer.service";
-import {Customer} from "../../models/customer.model";
+import {createCustomerDTO, Customer} from "../../models/customer.model";
 import {OrderService} from "../../services/order.service";
-import {Order} from "../../models/order.model";
+import {Order, OrderU} from "../../models/order.model";
+import {Cart} from "../../models/cart.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +14,7 @@ import {Order} from "../../models/order.model";
 })
 export class CheckoutComponent implements OnInit {
 
-  orders: Order | any;
+  orders: Order[] | any;
   total:number = 0;
   customer: Customer | any;
   form = new FormGroup({
@@ -30,11 +32,24 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private customerServer: CustomerService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router
   ) {
     this.customerServer.getCustomerById(`${localStorage.getItem('MKPG')}`).subscribe({
       next: data => {
         this.customer = data;
+        this.form.get('firstName')?.patchValue(`${data.firstName}`);
+        this.form.get('lastName')?.patchValue(`${data.lastName}`);
+        this.form.get('email')?.patchValue(`${data.email}`);
+        if (this.customer.address.length > 0){
+          console.log(this.customer.address[0]);
+          this.form.get('street')?.patchValue(`${this.customer.address[0].street}`);
+          this.form.get('city')?.patchValue(`${this.customer.address[0].city}`);
+          this.form.get('state')?.patchValue(`${this.customer.address[0].state}`);
+          this.form.get('state')?.patchValue(`${this.customer.address[0].state}`);
+          this.form.get('zipCode')?.patchValue(`${this.customer.address[0].zipCode}`);
+        }
+
       }
     })
   }
@@ -42,9 +57,10 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.myOrders$.subscribe({
       next: data => {
-        this.orders = data;
+        const myOrders = data.filter(order => order.status != "shipped" );
+        this.orders = myOrders;
         let total = 0;
-        data.forEach( order => {
+        myOrders.forEach( order => {
           total += +order.quantity * order.item.price;
         })
         this.total = total;
@@ -52,8 +68,31 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  save(){
+  submit(){
+    if(this.form.valid){
+      this.orders.forEach( (order : OrderU | any) => {
+        const myOrder: Order | any = {
+          orderId: order.orderId,
+          quantity: order.quantity,
+          deliveryDate: order.deliveryDate,
+          status: "shipped",
+          cart: order.cart,
+          item: order.item,
+        } ////////////////////////////////////
 
+
+        this.orderService.updateOrder( myOrder )
+          .subscribe(data => {
+            this.orderService.deleteMyOrder(myOrder.orderId);
+          })
+      })
+
+
+      this.router.navigate(['/thanks']);
+
+    }else {
+      this.form.markAllAsTouched();
+    }
   }
 
   deleteItem(id: number){
@@ -65,3 +104,4 @@ export class CheckoutComponent implements OnInit {
   }
 
 }
+

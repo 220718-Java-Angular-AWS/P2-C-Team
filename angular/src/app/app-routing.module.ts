@@ -6,6 +6,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import {HomeComponent} from "./pages/home/home.component";
 import {CheckoutComponent} from "./pages/checkout/checkout.component";
+import {ThanksComponent} from "./pages/thanks/thanks.component";
 
 
 const routes: Routes = [
@@ -28,6 +29,15 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
+  },
+  {
+    path: 'item/:id',
+    component: HomeComponent
+  }
+  ,
+  {
+    path: 'thanks',
+    component: ThanksComponent
   }
 ];
 

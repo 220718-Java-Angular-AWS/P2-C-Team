@@ -1,7 +1,7 @@
 <div class="container">
   <div class="form-container">
 
-  <form [formGroup]="form" (ngSubmit)="save()">
+  <form [formGroup]="form" (ngSubmit)="submit()">
     <div>
       <label>First Name:</label>
       <input class="input" type="text" placeholder="First Name" formControlName="firstName">
@@ -65,7 +65,7 @@
     </div>
     <div>
       <label>Date Expiration:</label>
-      <input class="input" type="date" placeholder="Last Name" formControlName="dateExpiration">
+      <input class="input" type="month" placeholder="Last Name" formControlName="dateExpiration" min="2022-09">
       <strong class="error" *ngIf="form.get('dateExpiration')?.touched && form.get('dateExpiration')?.hasError('required')">
         This field is required
       </strong>

@@ -11,8 +11,20 @@
         <li class="menu-item">Sega</li>
       </ul>
     </div>
-    <div class="search">
-      <input class="input input-search" type="text" placeholder="Search...">
+    <div class="search" [class.active]="showSearch">
+      <input class="input input-search" type="text" [(ngModel)]="searchItem" (keyup)="getItems()" placeholder="Search..." (click)="onClickShowSearch()">
+      <div class="search-result" [class.active]="showSearch">
+        <div *ngFor="let item of itemArr" >
+          <picture>
+            <img class="search-image" src="assets/images/FIFA-22-Nintendo-Switch.jpg">
+          </picture>
+          <div class="search-result-content">
+            <div> <a [routerLink]="['/item', item.itemId]" >{{item.itemName}}</a></div>
+            <div>{{item.category.name}}</div>
+          </div>
+        </div>
+      </div>
+      <button class="search-hide" (click)="hideSearch()" [class.active]="showSearch">X</button>
     </div>
     <div class="second-menu">
       <ul class="menu-list">
@@ -31,10 +43,10 @@
             </ng-template>
           </div>
         </li>
-        <li class="item-icon" (mouseenter)="onMouseEnterCart()" (mouseleave)="onMouseleaveCart()" >
-          <i class="bi bi-cart3"></i>
+        <li class="item-icon" >
+          <div (click)="toggleCart()" ><i class="bi bi-cart3"></i></div>
           <div class="dropdown-cart" [class.active]="dropDownCart">
-            <h3 class="cart-title">Cart</h3>
+            <h3 class="cart-title">Cart <button (click)="toggleCart()">X</button></h3>
             <app-cart [cart]="cart"></app-cart>
             <button (click)="toCheckOut()">Check Out</button>
           </div>

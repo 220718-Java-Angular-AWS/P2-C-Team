@@ -115,3 +115,60 @@
   border-bottom: 1px solid var(--color-font);
   margin-bottom: 1rem;
 }
+
+.search.active {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #fff;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.search.active .input-search {
+  width: 60rem;
+  margin: 3rem auto;
+  display: block;
+}
+
+.search-result{
+  display: none;
+  max-width: 60rem;
+  margin: auto;
+}
+
+.search-result.active{
+  display: block;
+}
+
+.search-hide {
+  display: none;
+  position: absolute;
+  top: 3rem;
+  right: 4rem;
+  width: 4rem;
+  height: 4rem;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.search-hide.active {
+  display: block;
+}
+
+.search-image {
+  max-width: 6rem;
+  margin-right: 3rem;
+}
+
+.search-result-content {
+  font-size: 1.3rem;
+}
+
+.search-result > div {
+  display: flex;
+  margin-bottom: 3rem;
+  align-items: center;
+}

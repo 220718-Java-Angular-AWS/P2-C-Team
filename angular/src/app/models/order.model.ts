@@ -17,6 +17,12 @@ export interface Order {
   }
 }
 
+export interface OrderU {
+  orderId: number,
+  quantity: string,
+  status: string,
+}
+
 export interface orderOrderDTO extends Omit<Order, 'orderId'> {
 
 }
