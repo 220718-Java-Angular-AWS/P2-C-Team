@@ -1,8 +1,8 @@
-package com.revature.DaynaJonesP2.beans;
+package com.revature.MKPG.beans.controllers;
 
-import com.revature.DaynaJonesP2.beans.services.CartService;
-import com.revature.DaynaJonesP2.Entities.Cart;
-import com.revature.DaynaJonesP2.Exceptions.InvalidInputException;
+import com.revature.MKPG.beans.services.CartService;
+import com.revature.MKPG.Entities.Cart;
+import com.revature.MKPG.Exceptions.InvalidInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class CartController {
 
 
 
-    //5 crud things:
+    //CRUD
     // GET - read - find,
     // GET - read all - find all,
     // POST - create - save,

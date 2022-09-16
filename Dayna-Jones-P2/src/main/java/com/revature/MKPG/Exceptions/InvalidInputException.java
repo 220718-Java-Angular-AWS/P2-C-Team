@@ -1,4 +1,4 @@
-package com.revature.DaynaJonesP2.Exceptions;
+package com.revature.MKPG.Exceptions;
 
 public class InvalidInputException extends Exception{
     public InvalidInputException(String message) {

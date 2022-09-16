@@ -1,8 +1,8 @@
-package com.revature.DaynaJonesP2.beans.services;
+package com.revature.MKPG.beans.services;
 
-import com.revature.DaynaJonesP2.beans.repositories.CartRepository;
-import com.revature.DaynaJonesP2.Entities.Cart;
-import com.revature.DaynaJonesP2.Exceptions.InvalidInputException;
+import com.revature.MKPG.beans.repositories.CartRepository;
+import com.revature.MKPG.Entities.Cart;
+import com.revature.MKPG.Exceptions.InvalidInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,6 @@
-package com.revature.DaynaJonesP2.beans.services;
+package com.revature.MKPG.beans.services;
 
-import com.revature.DaynaJonesP2.Entities.Cart;
-import com.revature.DaynaJonesP2.Exceptions.InvalidInputException;
+import com.revature.MKPG.Entities.Cart;
 import org.springframework.stereotype.Service;
 
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package com.revature.DaynaJonesP2.Entities;
+package com.revature.MKPG.Entities;
 
 import javax.persistence.*;
 import java.util.Date;

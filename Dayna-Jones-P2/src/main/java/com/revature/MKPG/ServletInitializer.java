@@ -1,4 +1,4 @@
-package com.revature.DaynaJonesP2;
+package com.revature.MKPG;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

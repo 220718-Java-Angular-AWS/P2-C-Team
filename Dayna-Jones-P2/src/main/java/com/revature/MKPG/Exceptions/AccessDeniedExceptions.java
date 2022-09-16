@@ -1,4 +1,4 @@
-package com.revature.DaynaJonesP2.Exceptions;
+package com.revature.MKPG.Exceptions;
 
 public class AccessDeniedExceptions extends Exception {
     public AccessDeniedExceptions(String message) {

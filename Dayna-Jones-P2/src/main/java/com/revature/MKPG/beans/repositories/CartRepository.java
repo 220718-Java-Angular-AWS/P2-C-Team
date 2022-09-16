@@ -1,6 +1,5 @@
-package com.revature.DaynaJonesP2.beans.repositories;
+package com.revature.MKPG.beans.repositories;
 
-import com.revature.DaynaJonesP2.Entities.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
