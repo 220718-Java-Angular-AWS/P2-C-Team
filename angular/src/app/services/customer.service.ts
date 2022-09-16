@@ -8,6 +8,7 @@ import {BehaviorSubject} from "rxjs";
 })
 export class CustomerService {
 
+  private userID: any = localStorage.getItem('MKPG');
   private _url: String = `http://localhost:8080/api/customers`;
   private _userId = new BehaviorSubject<String | null>(localStorage.getItem('MKPG'));
 

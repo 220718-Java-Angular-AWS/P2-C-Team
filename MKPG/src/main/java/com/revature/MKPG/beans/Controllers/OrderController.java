@@ -87,7 +87,7 @@ public class OrderController {
     @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void updateOrder(@RequestBody Order order) {
-        
+
         service.updateOrder(order);
     }
 

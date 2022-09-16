@@ -19,13 +19,14 @@ export class HeaderComponent implements OnInit {
   showSearch:boolean = false;
   dropDown: boolean = false;
   dropDownCart: boolean = false;
-  loggedIn: boolean;
+  loggedIn: boolean = false;
   cart: any;
   delayTimer:any;
   itemArr: Item[] | any = [];
   active = 'home';
   items: Item[] =[];
   totalItems: number= 0;
+  customerId: any = localStorage.getItem('MKPG');
 
 
   constructor(
@@ -35,9 +36,31 @@ export class HeaderComponent implements OnInit {
     private itemService: ItemService,
     private orderService: OrderService
   ) {
+    this.itemsInCart();
+    this.router = _router;
+  }
+
+  ngOnInit(): void {
+    this.customerService.userId$.subscribe( userId => {
+      if(userId) {
+        this.loggedIn = true;
+        this.itemsInCart();
+      }else {
+        this.loggedIn = false;
+      }
+    })
+
+    this.orderService.myOrders$.subscribe(data => {
+      const ordersInCart = data.filter(order => order.cart.cartId == this.cart.cartId)
+        .filter(order => order.status != 'shipped')
+      this.totalItems = ordersInCart.length;
+    })
+  }
+
+  itemsInCart() {
     if (localStorage.getItem('MKPG')) {
       this.loggedIn = true;
-      cartService.getAllCarts().subscribe({
+      this.cartService.getAllCarts().subscribe({
         next: data => {
           const cart: any = data.find(cart => {
             return cart.customer.customerId == localStorage.getItem('MKPG');
@@ -61,23 +84,6 @@ export class HeaderComponent implements OnInit {
     }else {
       this.loggedIn = false;
     }
-    this.router = _router;
-  }
-
-  ngOnInit(): void {
-    this.customerService.userId$.subscribe( userId => {
-      if(userId) {
-        this.loggedIn = true;
-      }else {
-        this.loggedIn = false;
-      }
-    })
-
-    this.orderService.myOrders$.subscribe(data => {
-      const ordersInCart = data.filter(order => order.cart.cartId == this.cart.cartId)
-        .filter(order => order.status != 'shipped')
-      this.totalItems = ordersInCart.length;
-    })
   }
 
   onMouseEnterProfile(){
@@ -126,6 +132,8 @@ export class HeaderComponent implements OnInit {
 
   onClickLogOut() {
     this.customerService.logout();
+    this.orderService.cleanMyOrder();
+    this.router.navigate(['/login']);
   }
 
   onClickHome() {

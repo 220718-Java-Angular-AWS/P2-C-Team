@@ -49,6 +49,11 @@ export class OrderService {
     this.myOrders.next(this.orders);
   }
 
+  cleanMyOrder() {
+    this.orders = [];
+    this.myOrders.next(this.orders);
+  }
+
   setOrders(orders: Order[]) {
     this.orders = orders;
     this.myOrders.next(this.orders);
