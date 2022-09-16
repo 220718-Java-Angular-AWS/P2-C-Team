@@ -143,4 +143,8 @@ export class HeaderComponent implements OnInit {
       }
     }, 1500);
   }
+
+  toItemPage(id: number) {
+    this.router.navigate(['/item']);
+  }
 }

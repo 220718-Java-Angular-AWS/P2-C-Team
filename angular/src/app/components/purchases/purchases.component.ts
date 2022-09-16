@@ -12,7 +12,7 @@ import {Cart} from "../../models/cart.model";
 export class PurchasesComponent implements OnInit {
 
   cart: Cart | any;
-  orders: Order[] = [];
+  orders: Order[] | any= [];
 
   constructor(
     private cartService: CartService,

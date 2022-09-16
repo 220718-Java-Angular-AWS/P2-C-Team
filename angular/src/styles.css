@@ -98,12 +98,11 @@ body {
 }
 
 .error {
-  background-color: #0400ff;
-  color: #fff;
+  color: transparent;
+  color: red;
 }
 
 .error {
-  color: #0400ff;
   margin-bottom: 1.5rem;
   display: inline-block;
 }

@@ -87,30 +87,7 @@ public class OrderController {
     @PutMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void updateOrder(@RequestBody Order order) {
-        Integer cartId = order.getCart().getCartId();
-        Integer itemId = order.getItem().getItemId();
-        Optional<Cart> optionalCart = cartService.getCartById(cartId);
-        Optional<Item> optionalItem = itemService.getItemById(itemId);
-
-        Cart cart = null;
-        Item item = null;
-
-        if (optionalCart.isPresent()) {
-            cart = optionalCart.get();
-            cart.addOrder(order);
-
-        } else {
-            throw new CustomerNotFoundException("Did not find cart id - " + cartId);
-        }
-
-        if (optionalItem.isPresent()) {
-            item = optionalItem.get();
-            item.addOrder(order);
-
-        } else {
-            throw new CustomerNotFoundException("Did not find item id - " + itemId);
-        }
-
+        
         service.updateOrder(order);
     }
 

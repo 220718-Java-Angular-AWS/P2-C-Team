@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 export class CartComponent implements OnInit {
 
   @Input() cart: Cart;
-  orders: Order[] = [];
+  orders: Order[] | any = [];
 
   constructor(
     private cartService: CartService,

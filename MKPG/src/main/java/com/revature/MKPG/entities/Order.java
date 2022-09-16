@@ -1,6 +1,7 @@
 package com.revature.MKPG.entities;
 
 import lombok.Builder;
+
 import javax.persistence.*;
 @Builder
 @Entity
