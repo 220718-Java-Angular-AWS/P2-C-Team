@@ -11,6 +11,7 @@ import {NintendoComponent} from "././pages/nintendo/nintendo.component";
 import {PlayStationComponent} from "./pages/playstation/playstation.component";
 import {XboxComponent} from "./pages/xbox/xbox.component";
 import { ComputerComponent } from "./pages/computer/computer.component";
+import {ItemComponent} from "./components/item/item.component";
 
 const routes: Routes = [
   {
@@ -34,8 +35,8 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
-    path: 'item/',
-    component: HomeComponent
+    path: 'item',
+    component: ItemComponent
   },
   {
     path: 'thanks',

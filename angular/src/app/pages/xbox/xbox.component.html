@@ -9,7 +9,7 @@
             <div class="item-cells-wrap border-cell item-grid-view four-cells expulsion-one-cell">
               <div class="item-cell" *ngFor="let item of isPlay(items)">
                 <div class="item-container">
-                    <a (click)=" itemPage(item.itemId)" class="item-img">
+                    <a [routerLink]="['/item']" [queryParams]="{id: item.itemId}" class="item-img">
                       <img src="{{ item.itemImage }}" alt="{{ item.itemName }}" width="240px" height="480px">
                     <ul class="item-features">
                       <li>

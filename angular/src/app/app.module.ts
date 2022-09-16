@@ -16,11 +16,11 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ThanksComponent } from './pages/thanks/thanks.component';
 import { PurchasesComponent } from './components/purchases/purchases.component';
-import { ItemComponent } from '././components/item/item.component';
-import { ComputerComponent } from '././pages/computer/computer.component';
-import { PlayStationComponent } from '././pages/playstation/playstation.component';
-import { XboxComponent } from '././pages/xbox/xbox.component';
-import { NintendoComponent } from '././pages/nintendo/nintendo.component';
+import { ItemComponent } from './components/item/item.component';
+import { ComputerComponent } from './pages/computer/computer.component';
+import { PlayStationComponent } from './pages/playstation/playstation.component';
+import { XboxComponent } from './pages/xbox/xbox.component';
+import { NintendoComponent } from './pages/nintendo/nintendo.component';
 
 @NgModule({
   declarations: [
