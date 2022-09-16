@@ -38,12 +38,6 @@ public class ItemController{
         }else {
             throw new CustomerNotFoundException( "Item id " + itemId + " not found");
         }
-        /*
-        try{
-            optionalUser.isPresent();
-        }catch(Exception e){
-            System.out.println(e);
-        }*/
         return item;
     }
 
@@ -51,7 +45,7 @@ public class ItemController{
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody Item getItemByName(@PathVariable String itemName) {
         System.out.println(itemName);
-        Optional<Item> optionalItem = service.findByName(itemName);
+        Optional<Item> optionalItem = service.getByItemName(itemName);
 
         Item item = null;
 
@@ -60,14 +54,6 @@ public class ItemController{
         }else {
             throw new CustomerNotFoundException( "Item name " + itemName + " not found");
         }
-       /* Optional<Item> optionalUser = service.findByName(itemName);
-        try{
-            optionalUser.isPresent();
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
-        */
         return item;
     }
 
@@ -76,6 +62,7 @@ public class ItemController{
     public @ResponseBody List<Item> getAllItems() {
         return service.getAllItems();
     }
+
 
     @PostMapping()
     @ResponseStatus(value = HttpStatus.ACCEPTED)
@@ -96,9 +83,22 @@ public class ItemController{
         service.createItem(item);
     }
 
-    @PutMapping()
+    @PutMapping("/id/{itemId}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void updateItem(@Valid @RequestBody Item item){
+        Integer categoryId = item.getCategory().getCategoryId();
+        Optional<Category> optionalCategory = categoryService.getCategoryById(categoryId);
+
+        Category category = null;
+
+        if (optionalCategory.isPresent()) {
+            category = optionalCategory.get();
+            category.addItems(item);
+
+        } else {
+            throw new CustomerNotFoundException("Did not find category id - " + categoryId);
+        }
+        System.out.println(item);
         service.updateItem(item);
     }
 

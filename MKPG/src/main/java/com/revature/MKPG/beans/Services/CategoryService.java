@@ -24,12 +24,12 @@ public class CategoryService {
         return categoryRepository.findById(id);
     }
 
-    public void createCategory(Category category){
-        categoryRepository.save(category);
+    public Category createCategory(Category category){
+        return categoryRepository.save(category);
     }
 
-    public void updateCategory(Category category){
-        categoryRepository.save(category);
+    public Category updateCategory(Category category){
+        return categoryRepository.save(category);
     }
     public void deleteById(Integer id){
         categoryRepository.deleteById(id);

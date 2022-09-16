@@ -14,17 +14,9 @@ public class CartService {
     //ValidatorService validator;
 
     @Autowired
-    public CartService(CartRepository CartRepository /*ValidatorService validatorService*/) {
+    public CartService(CartRepository CartRepository) {
         this.repo = CartRepository;
-        //this.validator = validatorService;
     }
-
-    //5 crud things:
-    // GET - read - find,
-    // GET - read all - find all,
-    // POST - create - save,
-    // PUT/PATCH - update - save,
-    // DELETE - delete - delete
 
     public List<Cart> getAllCart() {
         return repo.findAll();
@@ -36,11 +28,6 @@ public class CartService {
 
     public void createCart(Cart cart) {
         repo.save(cart);
-        /*if(validator.validateCart(cart)) {
-            repo.save(cart);
-        } else {
-            throw new InvalidInputException("this user has invalid data");
-        }*/
     }
 
     public void updateCart(Cart cart) {

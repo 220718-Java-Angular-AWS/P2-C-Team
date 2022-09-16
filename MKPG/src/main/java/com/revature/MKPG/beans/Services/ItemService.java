@@ -24,19 +24,16 @@ public class ItemService {
     public Optional<Item> getItemById(Integer id){
         return repo.findById(id);
     }
+    public Optional<Item> getByItemName(String itemName){
+    return repo.getItemByName(itemName);
+}
 
-    public Optional<Item> findByName(String itemName){
-        return repo.findBySimilarItemName(itemName);
+    public Item createItem(Item item){ return repo.save(item); }
+
+
+    public Item updateItem(Item item){
+        return repo.save(item);
     }
-
-    public void createItem(Item item){
-        repo.save(item);
-    }
-
-    public void updateItem(Item item){
-        repo.save(item);
-    }
-
     public void deleteItemById(Integer id){
         repo.deleteById(id);
     }

@@ -60,6 +60,7 @@
   cursor: initial;
   width: 20rem;
   background-color: #fff;
+  color:#0400ff;
 }
 
 .dropdown > ul {
@@ -184,4 +185,3 @@
   width: 2rem;
   height: 2rem;
 }
-

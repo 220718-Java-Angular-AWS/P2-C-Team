@@ -3,6 +3,7 @@ package com.revature.MKPG.entities;
 //import jakarta.validation.constraints.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Builder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+@Builder
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -59,6 +60,19 @@ public class Customer {
         this.phone = phone;
         this.birthDate = birthDate;
         this.created = created;
+    }
+
+    public Customer(Integer customerId, String firstName, String lastName, String email, String password, String phone, Date birthDate, Date created, List<Address> address, Cart cart) {
+        this.customerId = customerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.birthDate = birthDate;
+        this.created = created;
+        this.address = address;
+        this.cart = cart;
     }
 
     public Integer getCustomerId() {
@@ -140,8 +154,6 @@ public class Customer {
         getAddress().add(address);
         address.setCustomer(this);
     }
-
-
 
     @Override
     public String toString() {

@@ -21,18 +21,12 @@ public class CartController {
 
 
 
-    //CRUD
-    // GET - read - find,
-    // GET - read all - find all,
-    // POST - create - save,
-    // PUT/PATCH - update - save,
-    // DELETE - delete - delete
+
 
     @GetMapping(value = "/{cartId}")
     @ResponseStatus(value = HttpStatus.OK)
     public @ResponseBody Cart getCartById(@PathVariable Integer cartId) {
         Optional<Cart> optionalCart = service.getCartById(cartId);
-        //TODO: Do the isPresent() check and throw exception if needed
         return optionalCart.get();
     }
 

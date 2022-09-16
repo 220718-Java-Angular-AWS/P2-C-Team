@@ -111,7 +111,7 @@ public class OrderController {
             throw new CustomerNotFoundException("Did not find item id - " + itemId);
         }
 
-        service.createOrder(order);
+        service.updateOrder(order);
     }
 
     @DeleteMapping("/{orderId}")

@@ -7,7 +7,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import {HomeComponent} from "./pages/home/home.component";
 import {CheckoutComponent} from "./pages/checkout/checkout.component";
 import {ThanksComponent} from "./pages/thanks/thanks.component";
-
+import { ItemComponent } from "./components/item/item.component";
 
 const routes: Routes = [
   {
@@ -31,13 +31,11 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
-    path: 'item/:id',
-    component: HomeComponent
-  }
-  ,
-  {
     path: 'thanks',
     component: ThanksComponent
+  },{
+    path: 'item',
+    component: ItemComponent
   }
 ];
 

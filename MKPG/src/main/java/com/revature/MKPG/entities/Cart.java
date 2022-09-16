@@ -1,12 +1,14 @@
 package com.revature.MKPG.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Builder
 @Entity
 @Table(name = "carts")
 public class Cart {
@@ -33,6 +35,13 @@ public class Cart {
 
     public Cart(Integer cartId, Integer total, Date checkOutDate) {
         this.cartId = cartId;
+        this.total = total;
+        this.checkOutDate = checkOutDate;
+    }
+    public Cart(Integer cartId, Customer customer, List<Order> orders, Integer total, Date checkOutDate) {
+        this.cartId = cartId;
+        this.customer = customer;
+        this.orders = orders;
         this.total = total;
         this.checkOutDate = checkOutDate;
     }

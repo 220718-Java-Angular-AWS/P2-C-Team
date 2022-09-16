@@ -21,6 +21,9 @@ export class HeaderComponent implements OnInit {
   cart: any;
   delayTimer:any;
   itemArr: Item[] | any = [];
+  active = 'home';
+  items: Item[] =[];
+
 
   constructor(
     private router: Router,
@@ -64,7 +67,6 @@ export class HeaderComponent implements OnInit {
         this.loggedIn = false;
       }
     })
-
   }
 
   onMouseEnterProfile(){

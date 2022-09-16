@@ -1,12 +1,14 @@
 package com.revature.MKPG.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Builder
 @Entity(name = "categories")
 public class Category {
     @Id
@@ -27,6 +29,13 @@ public class Category {
     }
 
     public Category(String name, String console, List<Item> item) {
+        this.name = name;
+        this.console = console;
+        this.item = item;
+    }
+
+    public Category(Integer categoryId, String name, String console, List<Item> item) {
+        this.categoryId = categoryId;
         this.name = name;
         this.console = console;
         this.item = item;

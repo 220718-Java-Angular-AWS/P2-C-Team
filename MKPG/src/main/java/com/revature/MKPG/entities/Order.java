@@ -1,7 +1,8 @@
 package com.revature.MKPG.entities;
 
+import lombok.Builder;
 import javax.persistence.*;
-
+@Builder
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -34,6 +35,15 @@ public class Order {
         this.quantity = quantity;
         this.deliveryDate = deliveryDate;
         this.status = status;
+    }
+
+    public Order(Integer orderId, Integer quantity, String deliveryDate, String status, Cart cart, Item item) {
+        this.orderId = orderId;
+        this.quantity = quantity;
+        this.deliveryDate = deliveryDate;
+        this.status = status;
+        this.cart = cart;
+        this.item = item;
     }
 
     public Integer getOrderId() {

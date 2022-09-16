@@ -11,11 +11,13 @@ import java.util.Optional;
 @Repository
 public interface ItemRepo extends MyRepoBase<Item, Integer> {
 
+
+
     @Query("SELECT i FROM item i WHERE i.itemName =:item_name")
-    Optional<Item> findBySimilarItemName(
+    Optional<Item> getItemByName(
             @Param("item_name") String itemName);
 
-    @Query("SELECT i FROM item i WHERE i.price =:price")
+    @Query("SELECT i FROM item i WHERE i.price < :price")
     Optional<List<Item>> findAllByPrice(
             @Param("price") Double price);
 }

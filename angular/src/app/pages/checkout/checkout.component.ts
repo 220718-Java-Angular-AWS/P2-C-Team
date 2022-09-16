@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomerService} from "../../services/customer.service";
-import {createCustomerDTO, Customer} from "../../models/customer.model";
+import {Customer} from "../../models/customer.model";
 import {OrderService} from "../../services/order.service";
 import {Order, OrderU} from "../../models/order.model";
-import {Cart} from "../../models/cart.model";
 import {Router} from "@angular/router";
 
 @Component({
@@ -78,7 +77,7 @@ export class CheckoutComponent implements OnInit {
           status: "shipped",
           cart: order.cart,
           item: order.item,
-        } ////////////////////////////////////
+        }
 
 
         this.orderService.updateOrder( myOrder )

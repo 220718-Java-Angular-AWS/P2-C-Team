@@ -11,6 +11,6 @@ import java.util.Optional;
 @NoRepositoryBean
 public interface MyRepoBase<T, ID extends Serializable> extends JpaRepository<Item, Integer> {
     Optional<List<T>> findAllByPrice(Double price);
-    Optional<T> findBySimilarItemName(String itemName);
+    Optional<T> getItemByName(String itemName);
 }
 

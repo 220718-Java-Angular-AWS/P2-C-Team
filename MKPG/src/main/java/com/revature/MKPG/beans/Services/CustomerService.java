@@ -2,6 +2,7 @@ package com.revature.MKPG.beans.Services;
 
 import com.revature.MKPG.beans.Repositories.CustomerRepo;
 import com.revature.MKPG.entities.Customer;
+import com.revature.MKPG.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,13 @@ public class CustomerService {
         this.repo = repo;
     }
 
+    public Customer createCustomer(Customer customer) {
+        Optional<Customer> savedCustomer = repo.findByEmail(customer.getEmail());
+        if(savedCustomer.isPresent()){
+            throw new ResourceNotFoundException("Customer already exist with given email: " + customer.getEmail());
+        }
+        return repo.save(customer);
+    }
     public List<Customer> getAllCustomers() {
         return repo.findAll();
     }
@@ -26,12 +34,9 @@ public class CustomerService {
     }
 
     public Optional<Customer> getCustomerByEmail(String email){ return repo.findByEmail(email);}
-    public void createCustomer(Customer customer) {
-        repo.save(customer);
-    }
 
-    public void updateCustomer(Customer customer) {
-        repo.save(customer);
+    public Customer updateCustomer(Customer customer) {
+        return repo.save(customer);
     }
 
     public void deleteById(Integer id) {

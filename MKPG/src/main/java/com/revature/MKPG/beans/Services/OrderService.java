@@ -25,12 +25,12 @@ public class OrderService {
         return repo.findById(id);
     }
 
-    public void createOrder(Order order) {
-        repo.save(order);
+    public Order createOrder(Order order) {
+        return repo.save(order);
     }
 
-    public void updateOrder(Order order) {
-        repo.save(order);
+    public Order updateOrder(Order order) {
+        return repo.save(order);
     }
 
     public void deleteById(Integer id) {

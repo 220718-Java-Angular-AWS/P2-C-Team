@@ -8,9 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface CustomerRepo extends JpaRepository<Customer, Integer> {
-
     @Query("SELECT c FROM Customer c WHERE c.email =:email")
     Optional<Customer> findByEmail(
             @Param("email") String email);
-
 }
