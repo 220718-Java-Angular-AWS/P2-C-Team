@@ -18,7 +18,7 @@ export class ItemComponent implements OnInit {
   cartId: number | any;
 
   form = new FormGroup({
-    quantity: new FormControl(1, [Validators.required])
+    quantity: new FormControl("", [Validators.required])
   })
 
   constructor(

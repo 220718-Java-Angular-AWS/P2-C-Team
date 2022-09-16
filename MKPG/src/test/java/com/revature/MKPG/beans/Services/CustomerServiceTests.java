@@ -32,6 +32,11 @@ class CustomerServiceTests {
 
     @BeforeEach
             public void setup(){
+//            List<Customer> customers = Arrays.asList(
+//                    new Customer("sajedul", "kidu@bishaw.com", "karim", "01737186095", new SimpleDateFormat("dd/MM/yyyy").parse("05/05/2000"), new SimpleDateFormat("dd/MM/yyyy").parse("16/05/2022")),
+//                    new Customer( "nafis", "nafis@khan.com", "khan", "01737186096", new SimpleDateFormat("dd/MM/yyyy").parse("15/05/1990"), new SimpleDateFormat("dd/MM/yyyy").parse("16/08/2021")),
+//                    new Customer( "aayan", "aayan@karim.com", "karim", "01737186097",new SimpleDateFormat("dd/MM/yyyy").parse("25/05/1980"), new SimpleDateFormat("dd/MM/yyyy").parse("05/05/2020"))
+//            );
         try {
             customer = Customer.builder()
                     .customerId(1)
