@@ -188,7 +188,7 @@ line-height: 1.36;
 }
 
 .row.has-side-left>.row-body{
-  margin-left:234px;
+  margin-left:0;
 }
 
 .row-body-inner{
