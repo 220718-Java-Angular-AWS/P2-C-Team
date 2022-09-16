@@ -1,0 +1,30 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+
+:root {
+  --color-primary: #cbf23e;
+    --color-gray1: #f5f5f5;
+    --color-gray2: #eee;
+    --color-gray3: #0400ff;
+    --color-gray4: #757575;
+    --color-font: rgb(255, 255, 255);
+    --color-error: #ff0011;
+    background: rgb(63,94,251);
+    background: -moz-radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3f5efb",endColorstr="#fc466b",GradientType=1);
+  }
+  
+
+
+
+
+body{
+  font-family: 'Nunito', sans-serif;
+  color: var(--color-font);
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-top: 80px;
+}
