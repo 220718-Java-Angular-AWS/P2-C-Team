@@ -23,3 +23,8 @@ h2 {
 .description{
   margin-bottom: 2rem;
 }
+.text{
+  padding-left: 7rem;
+    padding-top: 2rem;
+    font-size: 20px;
+}
