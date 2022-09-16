@@ -44,7 +44,7 @@
           </div>
         </li>
         <li class="item-icon" >
-          <div (click)="toggleCart()" ><i class="bi bi-cart3"></i></div>
+          <div (click)="toggleCart()" ><i class="bi bi-cart3"></i><span class="items-total">{{totalItems}}</span></div>
           <div class="dropdown-cart" [class.active]="dropDownCart">
             <h3 class="cart-title">Cart <button (click)="toggleCart()" class="btn-close">X</button></h3>
             <app-cart [cart]="cart"></app-cart>

@@ -48,6 +48,7 @@ export class ItemComponent implements OnInit {
   }
 
   addToCart() {
+    console.log(this.form.get('quantity')?.value)
     const order: orderOrderDTO = {
         quantity: `${this.form.get('quantity')?.value}`,
         deliveryDate: `${Date.now()}`,
