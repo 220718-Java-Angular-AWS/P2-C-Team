@@ -26,6 +26,9 @@ export class ItemService {
     this._item.next(this._itemArr);
   }
 
+  getItem(item: Item){
+    return item;
+  }
 
   getAllItems() {
     return this.http.get<Item[]>(`${this._url}/all`);

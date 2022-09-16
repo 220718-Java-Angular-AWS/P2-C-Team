@@ -7,7 +7,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import {HomeComponent} from "./pages/home/home.component";
 import {CheckoutComponent} from "./pages/checkout/checkout.component";
 import {ThanksComponent} from "./pages/thanks/thanks.component";
-import { ItemComponent } from "./components/item/item.component";
+import {NintendoComponent} from "././pages/nintendo/nintendo.component";
+import {PlayStationComponent} from "./pages/playstation/playstation.component";
+import {XboxComponent} from "./pages/xbox/xbox.component";
+import { ComputerComponent } from "./pages/computer/computer.component";
 
 const routes: Routes = [
   {
@@ -31,11 +34,28 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
+    path: 'item/',
+    component: HomeComponent
+  },
+  {
     path: 'thanks',
     component: ThanksComponent
-  },{
-    path: 'item',
-    component: ItemComponent
+  },
+  {
+    path: 'category/nintendo',
+    component: NintendoComponent
+  },
+  {
+    path: 'category/playstation',
+    component: PlayStationComponent
+  },
+  {
+    path: 'category/xbox',
+    component: XboxComponent
+  },
+  {
+    path: 'category/pc',
+    component: ComputerComponent
   }
 ];
 

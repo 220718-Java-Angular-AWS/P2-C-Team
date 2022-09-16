@@ -8,7 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import {AppRoutingModule} from "./app-routing.module";
+import {AppRoutingModule} from "./app-routing.module - Copy";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './pages/home/home.component';
 import { AddressComponent } from './components/address/address.component';
@@ -17,6 +17,10 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ThanksComponent } from './pages/thanks/thanks.component';
 import { PurchasesComponent } from './components/purchases/purchases.component';
 import { ItemComponent } from '././components/item/item.component';
+import { ComputerComponent } from '././pages/computer/computer.component';
+import { PlayStationComponent } from '././pages/playstation/playstation.component';
+import { XboxComponent } from '././pages/xbox/xbox.component';
+import { NintendoComponent } from '././pages/nintendo/nintendo.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { ItemComponent } from '././components/item/item.component';
     CheckoutComponent,
     ThanksComponent,
     PurchasesComponent,
-    ItemComponent
+    ItemComponent,
+    ComputerComponent,
+    PlayStationComponent,
+    XboxComponent,
+    NintendoComponent
   ],
     imports: [
         BrowserModule,

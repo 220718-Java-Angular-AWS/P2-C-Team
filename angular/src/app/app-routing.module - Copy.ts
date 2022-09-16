@@ -7,12 +7,15 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import {HomeComponent} from "./pages/home/home.component";
 import {CheckoutComponent} from "./pages/checkout/checkout.component";
 import {ThanksComponent} from "./pages/thanks/thanks.component";
+import {NintendoComponent} from "./pages/nintendo/nintendo.component";
+import {PlayStationComponent} from "./pages/playstation/playstation.component";
+import {XboxComponent} from "./pages/xbox/xbox.component";
+import { ComputerComponent } from "./pages/computer/computer.component";
 
 
 const routes: Routes = [
   {
-    path: 'home',
-    component: HomeComponent
+    path: 'home',    component: HomeComponent
   },
   {
     path: 'login',
@@ -38,6 +41,22 @@ const routes: Routes = [
   {
     path: 'thanks',
     component: ThanksComponent
+  },
+  {
+    path: 'category/nintendo',
+    component: NintendoComponent
+  },
+  {
+    path: 'category/playstation',
+    component: PlayStationComponent
+  },
+  {
+    path: 'category/xbox',
+    component: XboxComponent
+  },
+  {
+    path: 'category/pc',
+    component: ComputerComponent
   }
 ];
 

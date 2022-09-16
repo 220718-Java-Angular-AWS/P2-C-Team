@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {CustomerService} from "../../services/customer.service";
 import {CartService} from "../../services/cart.service";
 import {Cart, createCartDTO} from "../../models/cart.model";
-import {ItemService} from "../../item.service";
+import {ItemService} from "../../services/item.service";
 import {Item} from "../../models/item.model";
 
 @Component({
@@ -13,6 +13,7 @@ import {Item} from "../../models/item.model";
 })
 export class HeaderComponent implements OnInit {
 
+  router: Router
   searchItem:string = "";
   showSearch:boolean = false;
   dropDown: boolean = false;
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit {
 
 
   constructor(
-    private router: Router,
+    private _router: Router,
     private customerService: CustomerService,
     private cartService: CartService,
     private itemService: ItemService
@@ -57,6 +58,7 @@ export class HeaderComponent implements OnInit {
     }else {
       this.loggedIn = false;
     }
+    this.router = _router;
   }
 
   ngOnInit(): void {
@@ -95,6 +97,22 @@ export class HeaderComponent implements OnInit {
 
   onClickProfile(){
     this.router.navigate(['/profile']);
+  }
+
+  onClickNintendo(){
+    this.router.navigate(['/category/nintendo']);
+  }
+
+  onClickPlayStation(){
+    this.router.navigate(['/category/playstation']);
+  }
+
+  onClickXBox(){
+    this.router.navigate(['/category/xbox']);
+  }
+
+  onClickPC(){
+    this.router.navigate(['/category/pc']);
   }
 
   onClickLogOut() {

@@ -7,10 +7,13 @@
 
 .container > div {
   padding: 0 3rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
 }
 
 .logo {
-  padding-left: 0;
+  align-items: left;
+  padding-right: 0;
 }
 
 .menu {
@@ -24,6 +27,7 @@
 }
 
 .menu-item {
+  font-size:36px;
   padding: 1.5rem;
   font-weight: 700;
   cursor: pointer;
