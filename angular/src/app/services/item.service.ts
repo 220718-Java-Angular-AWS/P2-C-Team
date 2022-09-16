@@ -37,7 +37,7 @@ export class ItemService {
     return this.http.get<Item>(`${this._url}/name/${itemName}`);
   }
 
-  getItemById(id: Number){
+  getItemById(id: string){
     return this.http.get<Item>(`${this._url}/id/${id}`);
   }
 

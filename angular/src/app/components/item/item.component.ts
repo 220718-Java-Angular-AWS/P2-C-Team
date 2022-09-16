@@ -1,7 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Item, orderItemDTO} from "../../models/item.model";
+import {ItemService} from '../../services/item.service';
+import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Item} from "../../models/item.model";
-import { ItemService } from '../../services/item.service';
+import {CartService} from "../../services/cart.service";
+import {OrderService} from "../../services/order.service";
+import {orderOrderDTO} from "../../models/order.model";
 
 @Component({
   selector: 'app-item',
@@ -10,54 +14,62 @@ import { ItemService } from '../../services/item.service';
 })
 export class ItemComponent implements OnInit {
 
-  items: Item[] =[];
-  nintendoForm: boolean = false;
-  playstationForm: boolean = false;
-  pcForm: boolean = false;
-  xboxForm: boolean = false;
+  item: Item | any;
+  cartId: number | any;
 
   form = new FormGroup({
-    itemName: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required]),
-    discountedPrice: new FormControl(''),
-    rating: new FormControl('', [Validators.required]),
-    itemImage: new FormControl('', [Validators.required]),
+    quantity: new FormControl(1, [Validators.required])
   })
 
-  constructor(private itemService: ItemService,) {
-
-        }
+  constructor(
+    private itemService: ItemService,
+    private route: ActivatedRoute,
+    private orderService:OrderService,
+    private cartService:CartService
+              ) {
+  }
 
 
   ngOnInit(): void {
-    this.itemService.items$.subscribe({
-      next: data => this.items = data
+    this.route.queryParamMap.subscribe(params => {
+      const id = params.get('id');
+      this.itemService.getItemById(`${id}`).subscribe({
+        next: data => {
+          this.item = data;
+
+          console.log(data)
+        }
+      })
     })
-    }
 
-    onClickItem(active: String){
-      if(active === 'home'){
-        this.nintendoForm = false;
-        this.playstationForm = false;
-        this.pcForm = false;
-        this.xboxForm = false;
-      }
-    }
-    save(){
-
-    }
-
-    addNintendoForm(){
-      this.nintendoForm = true;
-    }
-    addPlaystationForm(){
-      this.playstationForm = true;
-    }
-    addPCForm(){
-      this.pcForm = true;
-    }
-    addXBoxForm(){
-      this.xboxForm = true;
-    }
+    this.cartService.myCart$.subscribe( data => {
+      this.cartId = data.cartId;
+    })
   }
+
+  addToCart() {
+    console.log(this.form.get('quantity')?.value)
+    const order: orderOrderDTO = {
+        quantity: `${this.form.get('quantity')?.value}`,
+        deliveryDate: `${Date.now()}`,
+        status: 'inCart',
+        cart: {
+          cartId: this.cartId,
+          total: 0,
+        },
+        item: {
+          itemId: `${this.item.itemId}`,
+          itemName: '',
+          price: 0,
+          discountedPrice: 0,
+        }
+
+    }
+
+    this.orderService.createOrder(order).subscribe(data => {
+      this.orderService.addMyOrder(data);
+    })
+
+
+  }
+}

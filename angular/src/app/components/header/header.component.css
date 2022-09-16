@@ -122,7 +122,7 @@
 }
 
 .search.active {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   background: #fff;
@@ -170,6 +170,7 @@
 
 .search-result-content {
   font-size: 1.3rem;
+  color: #111;
 }
 
 .search-result > div {
@@ -188,4 +189,20 @@
   border-radius: 50%;
   width: 2rem;
   height: 2rem;
+}
+
+
+span.items-total{
+  background-color: #fff;
+  color: #111;
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  position: absolute;
+  left: 27px;
+  top: -10px;
 }

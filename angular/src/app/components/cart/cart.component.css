@@ -13,6 +13,7 @@ img {
 .cart-content {
   flex-grow: 1;
   padding-left: 2rem;
+  color: #111;
 }
 
 .btn-delete{

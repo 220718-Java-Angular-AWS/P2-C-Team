@@ -16,10 +16,10 @@
       <div class="search-result" [class.active]="showSearch">
         <div *ngFor="let item of itemArr" >
           <picture>
-            <img class="search-image" src="assets/images/FIFA-22-Nintendo-Switch.jpg">
+            <img class="search-image" [src]="item.itemImage">
           </picture>
           <div class="search-result-content">
-            <div> <a [routerLink]="['/item', item.itemId]" >{{item.itemName}}</a></div>
+            <div><a [routerLink]="['/item']" [queryParams]="{id: item.itemId}" (click)="hideSearch()">{{item.itemName}}</a></div>
             <div>{{item.category.name}}</div>
           </div>
         </div>
@@ -44,7 +44,7 @@
           </div>
         </li>
         <li class="item-icon" >
-          <div (click)="toggleCart()" ><i class="bi bi-cart3"></i></div>
+          <div (click)="toggleCart()" ><i class="bi bi-cart3"></i><span class="items-total">{{totalItems}}</span></div>
           <div class="dropdown-cart" [class.active]="dropDownCart">
             <h3 class="cart-title">Cart <button (click)="toggleCart()" class="btn-close">X</button></h3>
             <app-cart [cart]="cart"></app-cart>

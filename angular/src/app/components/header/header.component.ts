@@ -5,6 +5,7 @@ import {CartService} from "../../services/cart.service";
 import {Cart, createCartDTO} from "../../models/cart.model";
 import {ItemService} from "../../services/item.service";
 import {Item} from "../../models/item.model";
+import {OrderService} from "../../services/order.service";
 
 @Component({
   selector: 'app-header',
@@ -24,13 +25,15 @@ export class HeaderComponent implements OnInit {
   itemArr: Item[] | any = [];
   active = 'home';
   items: Item[] =[];
+  totalItems: number= 0;
 
 
   constructor(
     private _router: Router,
     private customerService: CustomerService,
     private cartService: CartService,
-    private itemService: ItemService
+    private itemService: ItemService,
+    private orderService: OrderService
   ) {
     if (localStorage.getItem('MKPG')) {
       this.loggedIn = true;
@@ -68,6 +71,12 @@ export class HeaderComponent implements OnInit {
       }else {
         this.loggedIn = false;
       }
+    })
+
+    this.orderService.myOrders$.subscribe(data => {
+      const ordersInCart = data.filter(order => order.cart.cartId == this.cart.cartId)
+        .filter(order => order.status != 'shipped')
+      this.totalItems = ordersInCart.length;
     })
   }
 
@@ -160,5 +169,9 @@ export class HeaderComponent implements OnInit {
         })
       }
     }, 1500);
+  }
+
+  toItemPage(id: number) {
+    this.router.navigate(['/item']);
   }
 }
